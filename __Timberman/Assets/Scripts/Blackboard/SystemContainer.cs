@@ -1,0 +1,73 @@
+using System.Collections.Generic;
+using System.Linq;
+using ModestTree;
+using Systems.Abstractions;
+using Systems.Data;
+using Systems.Data.Abstractions;
+
+namespace Blackboard
+{
+    public class SystemContainer
+    {
+        private readonly BaseSystem[] _systems;
+        private List<BaseSystem> _activeSystems;
+
+        private List<BaseSystem> _systemsToActivate;
+        private readonly List<BaseSystem> _systemsToDeactivate;
+
+        public SystemContainer(BaseSystem[] systems)
+        {
+            _systems = systems;
+            _activeSystems = systems.ToList();
+            
+            _systemsToActivate = new List<BaseSystem>();
+            _systemsToDeactivate = new List<BaseSystem>();
+        }
+
+        private void ActivateSystems()
+        {
+            _activeSystems.AddRange(_systemsToActivate);
+            _systemsToActivate.Clear();
+            _activeSystems = _activeSystems.OrderBy(system => _systems.IndexOf(system)).ToList();
+        }
+
+        private void DeactivateSystems()
+        {
+            _activeSystems.RemoveAll(system => _systemsToActivate.Contains(system));
+            _systemsToActivate.Clear();
+        }
+
+        public void Update()
+        {
+            ActivateSystems();
+
+            foreach (var system in _systems)
+                system.Update();
+            
+            DeactivateSystems();
+        }
+
+        public void RequestToActivateSystem<TSystem>()  where TSystem : BaseSystem
+        {
+            if (_activeSystems.Any(system => system is TSystem))
+                return;
+            
+            var systemToActivate = _systems.FirstOrDefault(system => system is TSystem);
+            
+            if  (systemToActivate == null)
+                return;
+            
+            _systemsToActivate.Add(systemToActivate);
+        }
+
+        public void RequestToDeactivateSystem<TSystem>() where TSystem : BaseSystem
+        {
+            var systemToDeactivate = _activeSystems.FirstOrDefault(system => system is TSystem);
+            
+            if (systemToDeactivate == null)
+                return;
+            
+            _systemsToDeactivate.Add(systemToDeactivate);
+        }
+    }
+}
