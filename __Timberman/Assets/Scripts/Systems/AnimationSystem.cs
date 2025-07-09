@@ -1,3 +1,4 @@
+using Consts;
 using Systems.Abstractions;
 using Systems.Data;
 using UnityEngine;
@@ -17,8 +18,7 @@ namespace Systems
         
         public override void Update()
         {
-            Debug.Log(_inputData.ChopDirection);
-            _animator.SetInteger("chop", _inputData.ChopDirection);
+            _animator.SetInteger(AnimNames.PlayerChopAnimation, _inputData.ChopDirection);
         }
     }
 }

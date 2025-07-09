@@ -6,9 +6,11 @@ namespace Installers
 {
     public class PlayerInstaller : MonoInstaller
     {
+        [SerializeField] private GameObject playerPrefab;
         [SerializeField] private Animator playerAnimator;
         public override void InstallBindings()
         {
+            AddPlayer();
             AddAnimator();
         }
         
@@ -18,6 +20,11 @@ namespace Installers
                 .FromInstance(playerAnimator)
                 .AsSingle()
                 .WhenInjectedInto<AnimationSystem>();
+        }
+        
+        private void AddPlayer()
+        {
+            Container.Bind<GameObject>().FromInstance(playerPrefab).NonLazy();
         }
     }
 }

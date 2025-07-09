@@ -13,7 +13,8 @@ namespace Installers
     public class BlackboardInstaller : MonoInstaller
     {
         [SerializeField] private InputActionAsset inputActionAsset;
-        [SerializeField] private GameObject playerPrefab;
+        [SerializeField] private GameObject treeSegmentPrefab;
+        [SerializeField] private Transform treeParent;
         public override void InstallBindings()
         {
             AddData();
@@ -21,7 +22,8 @@ namespace Installers
             
             AddInputAsset();
             AddContainers();
-            AddPlayer();
+            
+            AddTree();
         }
 
         private void AddSystems()
@@ -34,6 +36,9 @@ namespace Installers
             
             Container.Bind<AnimationSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<AnimationSystem>().FromResolve();
+            
+            Container.Bind<TreeSystem>().AsSingle();
+            Container.Bind<BaseSystem>().To<TreeSystem>().FromResolve();
             // Add other systems here
         }
 
@@ -41,6 +46,9 @@ namespace Installers
         {
             Container.Bind<InputData>().AsSingle();
             Container.Bind<BaseData>().To<InputData>().FromResolve();
+            
+            Container.Bind<TreeData>().AsSingle();
+            Container.Bind<BaseData>().To<TreeData>().FromResolve();
         }
 
         private void AddContainers()
@@ -54,10 +62,12 @@ namespace Installers
             Container.Bind<InputActionAsset>().FromInstance(inputActionAsset).NonLazy();
         }
 
-        private void AddPlayer()
+        private void AddTree()
         {
-            Container.Bind<GameObject>().FromInstance(playerPrefab).NonLazy();
+            Container.Bind<Transform>()
+                .WithId("Root")
+                .FromInstance(treeParent)
+                .AsSingle();
         }
-        
     }
 }
