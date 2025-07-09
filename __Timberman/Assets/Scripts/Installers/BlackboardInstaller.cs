@@ -31,6 +31,9 @@ namespace Installers
             
             Container.Bind<MovementSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<MovementSystem>().FromResolve();
+            
+            Container.Bind<AnimationSystem>().AsSingle();
+            Container.Bind<BaseSystem>().To<AnimationSystem>().FromResolve();
             // Add other systems here
         }
 
