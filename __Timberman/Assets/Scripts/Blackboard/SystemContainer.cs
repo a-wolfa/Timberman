@@ -41,8 +41,7 @@ namespace Blackboard
         {
             ActivateSystems();
 
-            foreach (var system in _systems)
-                system.Update();
+            _activeSystems.ForEach(system => system.Update());
             
             DeactivateSystems();
         }

@@ -1,3 +1,4 @@
+using Definitions;
 using Systems.Abstractions;
 using Systems.Data;
 using UnityEngine;
@@ -8,30 +9,35 @@ namespace Systems
 {
     public class InputSystem : BaseSystem
     {
-        private InputData _inputData;
+        private readonly InputData _inputData;
+        private readonly InputAction _chopInput;
+
+        private float _chopDirection;
         
         public InputSystem(InputData inputData, InputActionAsset inputAsset)
         {
             _inputData = inputData;
             
             var playerInputMap = inputAsset.FindActionMap("Player");
-            var chopLeft = playerInputMap.FindAction("Chop Left");
-            var chopRight = playerInputMap.FindAction("Chop Right");
+            _chopInput = playerInputMap.FindAction("Move");
 
-            chopLeft.performed += OnChopPressed;
-            chopRight.performed += OnChopPressed;
+            _chopInput.performed += OnChopInputPressed;
             
-            chopLeft.Enable();
-            chopRight.Enable();
+            _chopInput.Enable();
         }
 
         public override void Update()
         {
+            if (_chopDirection == 0)
+                return;
+            
+            _inputData.ChopDirection = (int)_chopDirection;
+            _chopDirection = 0;
         }
 
-        public void OnChopPressed(InputAction.CallbackContext ctx)
+        private void OnChopInputPressed(InputAction.CallbackContext context)
         {
-            _inputData.ChopInput = ctx.action;
+            _chopDirection = context.ReadValue<float>();
         }
     }
 }
