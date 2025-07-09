@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 567159631957422621}
   - component: {fileID: 919625543236311662}
   - component: {fileID: 6265106982916842178}
-  - component: {fileID: -5327608887548358422}
   m_Layer: 0
   m_Name: Segment
   m_TagString: Untagged
@@ -103,30 +102,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasLeftBranch: 0
   hasRightBranch: 0
---- !u!54 &-5327608887548358422
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4207462468942569880}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1

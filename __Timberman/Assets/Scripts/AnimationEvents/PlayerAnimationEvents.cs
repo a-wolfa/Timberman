@@ -8,34 +8,16 @@ namespace AnimationEvents
     public class PlayerAnimationEvents : MonoBehaviour
     {
         [SerializeField] private GameObject treeRoot;
-        
         [Inject] private readonly TreeData _treeData;
         
-        private Rigidbody _rb;
-
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
-        {
-            InitComponents();
-        }
-
-        private void InitComponents()
-        {
-            _rb =  treeRoot.GetComponentInChildren<Rigidbody>();
-        }
+        private GameObject _lowestSegment;
 
         public void Chop()
         {
-            _rb.useGravity = true;
-            
-            var throwDir = treeRoot.transform.position.x > 0? 1f : -1f;
-            _rb.AddForce((Vector3.left + Vector3.down) * 15 * throwDir, ForceMode.Impulse);
-            
+            _lowestSegment = treeRoot.transform.GetChild(0).gameObject;
             _treeData.ShouldMoveTree = true;
+            
+            Destroy(_lowestSegment);
         }
     }
 }

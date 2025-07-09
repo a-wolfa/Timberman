@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Components;
+using DG.Tweening;
 using Systems.Abstractions;
 using Systems.Data;
 using UnityEngine;
@@ -11,9 +12,8 @@ namespace Systems
     {
         private readonly TreeData _treeData;
         private readonly Transform _treeOrigin;
-        
-        private float _lowestSegmentY;
-        private float _highestSegmentY;
+
+        private float _yValueToMove = 2.56f;
         
         public TreeSystem(TreeData treeData, [Inject(Id = "Root")]Transform treeOrigin)
         {
@@ -29,7 +29,7 @@ namespace Systems
 
         private void MoveTreeSegmentsDown()
         {
-            Debug.Log("Move Tree Segments Down");
+            _treeOrigin.DOMoveY(_treeOrigin.position.y - _yValueToMove, .1f);
         }
 
     }
