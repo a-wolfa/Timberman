@@ -1,4 +1,7 @@
 using System;
+using Controllers;
+using Definitions;
+using Systems;
 using Systems.Data;
 using UnityEngine;
 using Zenject;
@@ -9,15 +12,13 @@ namespace AnimationEvents
     {
         [SerializeField] private GameObject treeRoot;
         [Inject] private readonly TreeData _treeData;
+        [Inject] GameplayController _gameplayController;
         
         private GameObject _lowestSegment;
 
         public void Chop()
         {
-            _lowestSegment = treeRoot.transform.GetChild(0).gameObject;
-            _treeData.ShouldMoveTree = true;
-            
-            Destroy(_lowestSegment);
+            _gameplayController.SendActivationRequest<ChoppingSystem>(RequestMode.Activation);
         }
     }
 }

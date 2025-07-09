@@ -1,4 +1,5 @@
 using Blackboard;
+using Controllers;
 using Systems;
 using Systems.Abstractions;
 using Systems.Data;
@@ -24,6 +25,7 @@ namespace Installers
             AddContainers();
             
             AddTree();
+            AddController();
         }
 
         private void AddSystems()
@@ -36,6 +38,9 @@ namespace Installers
             
             Container.Bind<AnimationSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<AnimationSystem>().FromResolve();
+            
+            Container.Bind<ChoppingSystem>().AsSingle();
+            Container.Bind<BaseSystem>().To<ChoppingSystem>().FromResolve();
             
             Container.Bind<TreeSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<TreeSystem>().FromResolve();
@@ -68,6 +73,11 @@ namespace Installers
                 .WithId("Root")
                 .FromInstance(treeParent)
                 .AsSingle();
+        }
+
+        private void AddController()
+        {
+            Container.Bind<GameplayController>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

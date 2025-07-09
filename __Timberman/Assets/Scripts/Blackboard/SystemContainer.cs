@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ModestTree;
+using Systems;
 using Systems.Abstractions;
 using Systems.Data;
 using Systems.Data.Abstractions;
@@ -22,6 +23,14 @@ namespace Blackboard
             
             _systemsToActivate = new List<BaseSystem>();
             _systemsToDeactivate = new List<BaseSystem>();
+            
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            RequestToDeactivateSystem<ChoppingSystem>();
+            DeactivateSystems();
         }
 
         private void ActivateSystems()
@@ -33,8 +42,8 @@ namespace Blackboard
 
         private void DeactivateSystems()
         {
-            _activeSystems.RemoveAll(system => _systemsToActivate.Contains(system));
-            _systemsToActivate.Clear();
+            _activeSystems.RemoveAll(system => _systemsToDeactivate.Contains(system));
+            _systemsToDeactivate.Clear();
         }
 
         public void Update()
