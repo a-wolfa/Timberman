@@ -1,5 +1,7 @@
 using Blackboard;
 using Controllers;
+using GameSignals;
+using Services;
 using Systems;
 using Systems.Abstractions;
 using Systems.Data;
@@ -18,6 +20,9 @@ namespace Installers
         [SerializeField] private Transform treeParent;
         public override void InstallBindings()
         {
+            AddSignals();
+            AddServices();
+            
             AddData();
             AddSystems();
             
@@ -78,6 +83,16 @@ namespace Installers
         private void AddController()
         {
             Container.Bind<GameplayController>().FromComponentInHierarchy().AsSingle();
+        }
+        
+        private void AddSignals()
+        {
+            Container.Bind<SegmentChoppedSignal>().AsSingle();
+        }
+        
+        private void AddServices()
+        {
+            Container.BindInterfacesAndSelfTo<ScoreService>().AsSingle();
         }
     }
 }
