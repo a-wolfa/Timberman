@@ -1,5 +1,9 @@
 using System;
+using Controllers;
+using Definitions;
+using Systems;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
@@ -7,6 +11,8 @@ namespace Player
     {
         private GameObject _tombstone;
         private SpriteRenderer _spriteRenderer;
+        
+        [Inject] private GameplayController _gameplayController;
         private void Awake()
         {
             Init();
@@ -32,6 +38,8 @@ namespace Player
         {
             _spriteRenderer.enabled = false;
             _tombstone.SetActive(true);
+            
+            _gameplayController.SendActivationRequest<InputSystem>(RequestMode.Deactivation);
         }
     }
 }
