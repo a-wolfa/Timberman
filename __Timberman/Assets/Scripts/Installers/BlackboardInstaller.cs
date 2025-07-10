@@ -124,6 +124,8 @@ namespace Installers
                 .WithId("ScoreText")
                 .FromInstance(scoreText)
                 .AsSingle();
+            
+            Container.Bind<TimerView>().FromComponentInHierarchy().AsSingle();
         }
         
         private void AddServices()
@@ -136,5 +138,6 @@ namespace Installers
             // Other services
             Container.BindInterfacesAndSelfTo<AudioService>().AsSingle();
         }
+        
     }
 }

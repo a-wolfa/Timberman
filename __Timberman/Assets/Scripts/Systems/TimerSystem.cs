@@ -1,6 +1,7 @@
 using Signals;
 using Systems.Abstractions;
 using Systems.Data;
+using UI.Views;
 using UnityEngine;
 using Zenject;
 
@@ -9,33 +10,44 @@ namespace Systems
     public class TimerSystem : BaseSystem
     {
         [Inject] private readonly TimerExpiredSignal _timerExpiredSignal;
-     
-        private readonly TimerData _timerData;
-        
-        private bool _hasLoggedStart = false;
 
-        public TimerSystem(TimerData timerData)
+        private readonly TimerData _timerData;
+        private readonly TimerView _timerView;
+
+        private float _currentTime;
+        private float _maxTime = 5;
+
+        public TimerSystem(TimerData timerData, TimerView timerView)
         {
-            _timerData =  timerData;
-            
+            _timerData = timerData;
+            _timerView = timerView;
+
             _timerData.StartTimer(5);
+            
+            Init();
         }
-        
-        public override void Update()
+
+        private void Init()
         {
-            if (_timerData.IsActive)
+            _currentTime = _maxTime;
+        }
+
+        public override void Update()
             {
-                if (_timerData.CurrentTime > 0)
+                Debug.Log(_currentTime);
+                if (_currentTime > 0)
                 {
-                    _timerData.CurrentTime -= Time.deltaTime;
-                    Debug.Log(_timerData.CurrentTime);
+                    _currentTime -= Time.deltaTime;
+                    _currentTime = Mathf.Max(_currentTime, 0);
+
+                    _timerView.SetSlider(_currentTime);
+                    _timerView.SetFill(_currentTime / _maxTime);
                 }
                 else
                 {
-                    // Fire Dead Signal
+                    
                 }
             }
-        }
 
-    }
+        }
 }

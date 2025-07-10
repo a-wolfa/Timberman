@@ -5,6 +5,7 @@ namespace Systems.Data
 {
     public class TimerData : BaseData
     {
+        public float MaxValue { get; set; }
         public float CurrentTime { get; set; }
         public float InitialTime { get; private set; }
         public bool IsActive { get; set; }

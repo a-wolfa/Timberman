@@ -25,5 +25,10 @@ namespace Controllers
             else if (request is RequestMode.Deactivation)
                 _systemContainer.RequestToDeactivateSystem<TSystem>();
         }
+
+        public void Die()
+        {
+            
+        }
     }
 }
