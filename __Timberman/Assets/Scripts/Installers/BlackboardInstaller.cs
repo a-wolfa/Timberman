@@ -6,6 +6,9 @@ using Systems;
 using Systems.Abstractions;
 using Systems.Data;
 using Systems.Data.Abstractions;
+using TMPro;
+using UI.Views;
+using UI.Presenters;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -18,9 +21,14 @@ namespace Installers
         [SerializeField] private InputActionAsset inputActionAsset;
         [SerializeField] private GameObject treeSegmentPrefab;
         [SerializeField] private Transform treeParent;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip chopSoundClip;
+        [SerializeField] private TextMeshProUGUI scoreText;
         public override void InstallBindings()
         {
             AddSignals();
+            AddAudio();
+            AddUI();
             AddServices();
             
             AddData();
@@ -90,9 +98,37 @@ namespace Installers
             Container.Bind<SegmentChoppedSignal>().AsSingle();
         }
         
+        private void AddAudio()
+        {
+            Container.Bind<AudioSource>()
+                .WithId("ChopAudioSource")
+                .FromInstance(audioSource)
+                .AsSingle();
+                
+            Container.Bind<AudioClip>()
+                .WithId("ChopSound")
+                .FromInstance(chopSoundClip)
+                .AsSingle();
+        }
+        
+        private void AddUI()
+        {
+            Container.Bind<TextMeshProUGUI>()
+                .WithId("ScoreText")
+                .FromInstance(scoreText)
+                .AsSingle();
+        }
+        
         private void AddServices()
         {
-            Container.BindInterfacesAndSelfTo<ScoreService>().AsSingle();
+            // MVP Pattern for Score
+            Container.Bind<ScoreService>().AsSingle();
+            Container.Bind<ScoreView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScorePresenter>().AsSingle();
+            
+            // Other services
+            Container.BindInterfacesAndSelfTo<AudioService>().AsSingle();
+            Container.Bind<UIService>().AsSingle();
         }
     }
 }

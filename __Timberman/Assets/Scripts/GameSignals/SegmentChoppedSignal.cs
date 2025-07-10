@@ -7,9 +7,8 @@ namespace GameSignals
     {
         public event Action<int> OnSegmentChopped;
         
-        public void Fire(int pointsAwarded = 10)
+        public void Fire(int pointsAwarded = 1)
         {
-            Debug.Log($"SegmentChoppedSignal: Firing with {pointsAwarded} points");
             OnSegmentChopped?.Invoke(pointsAwarded);
         }
         
