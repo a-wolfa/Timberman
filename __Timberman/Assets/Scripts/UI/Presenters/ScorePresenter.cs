@@ -1,7 +1,7 @@
 using System;
 using Zenject;
-using GameSignals;
 using Services;
+using Signals;
 using UI.Views;
 
 namespace UI.Presenters

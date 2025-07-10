@@ -5,6 +5,7 @@ using Systems;
 using Systems.Abstractions;
 using Systems.Data;
 using Systems.Data.Abstractions;
+using UnityEngine;
 
 namespace Blackboard
 {
@@ -57,14 +58,7 @@ namespace Blackboard
 
         public void RequestToActivateSystem<TSystem>()  where TSystem : BaseSystem
         {
-            if (_activeSystems.Any(system => system is TSystem))
-                return;
-            
             var systemToActivate = _systems.FirstOrDefault(system => system is TSystem);
-            
-            if  (systemToActivate == null)
-                return;
-            
             _systemsToActivate.Add(systemToActivate);
         }
 

@@ -1,6 +1,6 @@
 using Controllers;
 using Definitions;
-using GameSignals;
+using Signals;
 using Systems.Abstractions;
 using Systems.Data;
 using UnityEngine;

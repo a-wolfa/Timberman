@@ -1,7 +1,7 @@
 using Blackboard;
 using Controllers;
-using GameSignals;
 using Services;
+using Signals;
 using Systems;
 using Systems.Abstractions;
 using Systems.Data;
@@ -57,6 +57,9 @@ namespace Installers
             
             Container.Bind<TreeSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<TreeSystem>().FromResolve();
+            
+            Container.Bind<TimerSystem>().AsSingle();
+            Container.Bind<BaseSystem>().To<TimerSystem>().FromResolve();
             // Add other systems here
         }
 
@@ -67,6 +70,9 @@ namespace Installers
             
             Container.Bind<TreeData>().AsSingle();
             Container.Bind<BaseData>().To<TreeData>().FromResolve();
+            
+            Container.Bind<TimerData>().AsSingle();
+            Container.Bind<BaseData>().To<TimerData>().FromResolve();
         }
 
         private void AddContainers()
@@ -96,6 +102,7 @@ namespace Installers
         private void AddSignals()
         {
             Container.Bind<SegmentChoppedSignal>().AsSingle();
+            Container.Bind<TimerExpiredSignal>().AsSingle();
         }
         
         private void AddAudio()
@@ -128,7 +135,6 @@ namespace Installers
             
             // Other services
             Container.BindInterfacesAndSelfTo<AudioService>().AsSingle();
-            Container.Bind<UIService>().AsSingle();
         }
     }
 }

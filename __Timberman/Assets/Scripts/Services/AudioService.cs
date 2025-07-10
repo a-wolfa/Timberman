@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using Zenject;
-using GameSignals;
+using Signals;
 
 namespace Services
 {
