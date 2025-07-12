@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f45b2f0caea4710a318bdb7a01512f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionHandler: {fileID: 1693778978}
 --- !u!1001 &213691430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1310,14 +1311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c94433ff3e64c40a6f1dfaab36aae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBar: {fileID: 825705257}
-  _timeText: {fileID: 0}
-  _timeBarFill: {fileID: 0}
-  _normalColor: {r: 0, g: 1, b: 0, a: 1}
-  _warningColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _dangerColor: {r: 1, g: 0, b: 0, a: 1}
-  _warningThreshold: 0.5
-  _dangerThreshold: 0.2
+  sliderBar: {fileID: 825705257}
+  fillImage: {fileID: 293570647}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,7 +1841,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1374314760}
-  - {fileID: 1374314761}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1897,6 +1891,8 @@ MonoBehaviour:
   audioSource: {fileID: 370490039}
   chopSoundClip: {fileID: 8300000, guid: b9cd4fdc928a5c946a83fd504914fbc5, type: 3}
   scoreText: {fileID: 1757102353}
+  playerPrefab: {fileID: 1693778974}
+  playerAnimator: {fileID: 1185805076}
 --- !u!114 &1374314761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1920,10 +1916,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1693778975}
-  - component: {fileID: 1693778978}
   - component: {fileID: 1693778976}
   - component: {fileID: 1693778977}
-  m_Layer: 0
+  - component: {fileID: 1693778978}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2032,6 +2028,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef072bca271db024f854cb94fa178228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  branchLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1757102351
 GameObject:
   m_ObjectHideFlags: 0

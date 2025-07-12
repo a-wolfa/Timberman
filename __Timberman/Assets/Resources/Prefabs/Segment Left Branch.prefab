@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Branch
       objectReference: {fileID: 0}
+    - target: {fileID: 2420691450905586838, guid: 003da7e5fbf46c14b94cca9f97ee8af2, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4941613761968450885, guid: 003da7e5fbf46c14b94cca9f97ee8af2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5

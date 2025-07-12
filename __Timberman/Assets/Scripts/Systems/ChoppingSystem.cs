@@ -10,21 +10,47 @@ namespace Systems
 {
     public class ChoppingSystem : BaseSystem
     {
-        [Inject (Id = "Root")] private Transform _treeRoot;
-        [Inject] private readonly TreeData _treeData;
-        [Inject] GameplayController _gameplayController;
-        [Inject] private readonly SegmentChoppedSignal _segmentChoppedSignal;
+        private Transform _treeRoot;
+        private readonly TreeData _treeData;
+        GameplayController _gameplayController;
+        private readonly SegmentChoppedSignal _segmentChoppedSignal;
         
+        private GameObject _lowestSegment;
+        
+        private Rigidbody2D _rb2D;
+
+        public ChoppingSystem(TreeData treeData,
+            GameplayController gameplayController,
+            SegmentChoppedSignal segmentChoppedSignal,
+            [Inject(Id = "Root")] Transform treeRoot)
+        {
+            _treeData = treeData;
+            _gameplayController = gameplayController;
+            _segmentChoppedSignal = segmentChoppedSignal;
+            _treeRoot = treeRoot;
+        }
+
         public override void Update()
         {
-            var lowestSegment = _treeRoot.transform.GetChild(0).gameObject;
-            _treeData.ShouldMoveTree = true;
-            
-            Object.Destroy(lowestSegment);
+            _lowestSegment = _treeRoot.transform.GetChild(0).gameObject;
+            _lowestSegment.transform.SetParent(null);
+            ThrowSegments();
             
             _segmentChoppedSignal.Fire(1);
+            _treeData.ShouldMoveTree = true;
             
             _gameplayController.SendActivationRequest<ChoppingSystem>(RequestMode.Deactivation);
+        }
+
+        private void ThrowSegments()
+        {
+            Rigidbody2D rb = _lowestSegment.GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 1f;
+            
+            rb.AddForce(Vector2.one  * 10f, ForceMode2D.Impulse);
+            
+            Object.Destroy(_lowestSegment,2);
         }
     }
 }

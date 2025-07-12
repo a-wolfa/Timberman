@@ -1,6 +1,10 @@
 using System;
+using System.Timers;
 using Blackboard;
 using Definitions;
+using Player;
+using Signals;
+using Systems;
 using Systems.Abstractions;
 using UnityEngine;
 using Zenject;
@@ -11,11 +15,20 @@ namespace Controllers
     {
         [Inject] private readonly SystemContainer _systemContainer;
         [Inject] private readonly DataContainer _dataContainer;
+        
+        [Inject] private readonly TimerExpiredSignal _timerExpiredSignal;
+        
+        [SerializeField] private CollisionHandler collisionHandler;
 
         private void Update()
         {
             _systemContainer.Update();
             _dataContainer.Update();
+        }
+
+        private void OnEnable()
+        {
+            _timerExpiredSignal.Subscribe(Die);
         }
 
         public void SendActivationRequest<TSystem>(RequestMode request)  where TSystem : BaseSystem
@@ -28,7 +41,7 @@ namespace Controllers
 
         public void Die()
         {
-            
+            collisionHandler.Die();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Player
     {
         private GameObject _tombstone;
         private SpriteRenderer _spriteRenderer;
+        [SerializeField] private LayerMask branchLayer;
         
         [Inject] private GameplayController _gameplayController;
         private void Awake()
@@ -36,10 +37,22 @@ namespace Player
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            if (((1 << other.gameObject.layer) & branchLayer) == 0)
+                return;
+            
+            Debug.Log("Collision Enter");
+            
+            Die();
+        }
+
+        public void Die()
+        {
             _spriteRenderer.enabled = false;
             _tombstone.SetActive(true);
             
             _gameplayController.SendActivationRequest<InputSystem>(RequestMode.Deactivation);
+            _gameplayController.SendActivationRequest<TimerSystem>(RequestMode.Deactivation);
+            
         }
     }
 }

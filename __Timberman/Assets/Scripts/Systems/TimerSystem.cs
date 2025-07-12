@@ -33,21 +33,21 @@ namespace Systems
         }
 
         public override void Update()
+        {
+            if (_currentTime > 0)
             {
-                Debug.Log(_currentTime);
-                if (_currentTime > 0)
-                {
-                    _currentTime -= Time.deltaTime;
-                    _currentTime = Mathf.Max(_currentTime, 0);
+                _currentTime -= Time.deltaTime;
+                _currentTime = Mathf.Max(_currentTime, 0);
 
-                    _timerView.SetSlider(_currentTime);
-                    _timerView.SetFill(_currentTime / _maxTime);
-                }
-                else
-                {
-                    
-                }
+                _timerView.SetSlider(_currentTime);
+                _timerView.SetFill(_currentTime / _maxTime);
             }
-
+            else
+            {
+                Debug.Log("Timer Expired");
+                _timerExpiredSignal.Fire();
+            }
         }
+
+    }
 }
