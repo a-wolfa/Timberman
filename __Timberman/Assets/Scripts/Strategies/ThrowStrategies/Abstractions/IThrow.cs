@@ -1,9 +1,10 @@
+using Definitions;
 using UnityEngine;
 
 namespace Strategies.ThrowStrategies.Abstractions
 {
     public interface IThrow
     {
-        void Throw(GameObject go);
+        void Throw(GameObject go, Side side);
     }
 }

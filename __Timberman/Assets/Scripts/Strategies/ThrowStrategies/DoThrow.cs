@@ -1,3 +1,4 @@
+using Definitions;
 using DG.Tweening;
 using Strategies.ThrowStrategies.Abstractions;
 using UnityEngine;
@@ -6,9 +7,12 @@ namespace Strategies.ThrowStrategies
 {
     public class DoThrow : IThrow
     {
-        public void Throw(GameObject go)
+        public void Throw(GameObject go, Side side)
         {
-            go.transform.DOMove(go.transform.position + (new Vector3(1, .8f, 0) * 20), 1.5f);
+            var startPosition = go.transform.position;
+            go.transform.DOMove(
+                startPosition + new Vector3(-1 * (int)side, 0.8f, 0) * 20, 
+                1.5f);
             Debug.Log("Throw using DoTween");
         }
     }

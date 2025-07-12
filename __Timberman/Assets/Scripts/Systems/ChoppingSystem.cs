@@ -13,7 +13,10 @@ namespace Systems
     public class ChoppingSystem : BaseSystem
     {
         private Transform _treeRoot;
+        
         private readonly TreeData _treeData;
+        private readonly MovementData _movementData;
+        
         GameplayController _gameplayController;
         private readonly SegmentChoppedSignal _segmentChoppedSignal;
         
@@ -24,9 +27,11 @@ namespace Systems
         public ChoppingSystem(TreeData treeData,
             GameplayController gameplayController,
             SegmentChoppedSignal segmentChoppedSignal,
-            [Inject(Id = "Root")] Transform treeRoot)
+            [Inject(Id = "Root")] Transform treeRoot,
+            MovementData movementData)
         {
             _treeData = treeData;
+            _movementData = movementData;
             _gameplayController = gameplayController;
             _segmentChoppedSignal = segmentChoppedSignal;
             _treeRoot = treeRoot;
@@ -36,9 +41,10 @@ namespace Systems
         {
             _lowestSegment = _treeRoot.transform.GetChild(0).gameObject;
             _lowestSegment.transform.SetParent(null);
+            _lowestSegment.GetComponentInChildren<Collider2D>().enabled = false;
             
             var throwStrategy =  _gameplayController.GetThrowStrategy();
-            throwStrategy.Throw(_lowestSegment);
+            throwStrategy.Throw(_lowestSegment, _movementData.CurrentSide);
             
             Object.Destroy(_lowestSegment,2);
             

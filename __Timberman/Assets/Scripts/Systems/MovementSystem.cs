@@ -9,15 +9,15 @@ namespace Systems
     public class MovementSystem : BaseSystem
     {
         private readonly InputData _inputData;
-        private Side _currentSide = Side.Left;
+        private readonly MovementData _movementData;
         
         private GameObject _player;
 
-        public MovementSystem(InputData inputData, GameObject player)
+        public MovementSystem(InputData inputData, GameObject player, MovementData movementData)
         {
             _inputData = inputData;
             _player = player;
-            
+            _movementData = movementData;
         }
         public override void Update()
         {
@@ -31,10 +31,10 @@ namespace Systems
 
         private void Move(int  direction)
         {
-            if (direction == (int)_currentSide)
+            if (direction == (int) _movementData.CurrentSide)
                 return;
             
-            _currentSide = (Side)direction;
+            _movementData.CurrentSide = (Side)direction;
             
             var position = _player.transform.position;
             position.x = -position.x;

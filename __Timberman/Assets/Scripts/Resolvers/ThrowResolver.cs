@@ -8,8 +8,7 @@ namespace Resolvers
     public class ThrowResolver
     {
         private readonly DiContainer _container;
-
-        [Inject]
+        
         public ThrowResolver(DiContainer container)
         {
             _container = container;
