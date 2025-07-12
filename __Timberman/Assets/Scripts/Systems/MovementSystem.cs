@@ -27,14 +27,13 @@ namespace Systems
                 return;
             
             Move(chopInput);
+            _movementData.CurrentSide = (Side)chopInput;
         }
 
-        private void Move(int  direction)
+        private void Move(int chopInput)
         {
-            if (direction == (int) _movementData.CurrentSide)
+            if (chopInput == (int) _movementData.CurrentSide)
                 return;
-            
-            _movementData.CurrentSide = (Side)direction;
             
             var position = _player.transform.position;
             position.x = -position.x;

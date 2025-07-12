@@ -1,3 +1,4 @@
+using Components;
 using Controllers;
 using Definitions;
 using DG.Tweening;
@@ -40,8 +41,8 @@ namespace Systems
         public override void Update()
         {
             _lowestSegment = _treeRoot.transform.GetChild(0).gameObject;
+            _gameplayController.playerSide = _movementData.CurrentSide;
             _lowestSegment.transform.SetParent(null);
-            _lowestSegment.GetComponentInChildren<Collider2D>().enabled = false;
             
             var throwStrategy =  _gameplayController.GetThrowStrategy();
             throwStrategy.Throw(_lowestSegment, _movementData.CurrentSide);

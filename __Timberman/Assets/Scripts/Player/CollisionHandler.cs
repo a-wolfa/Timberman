@@ -1,4 +1,5 @@
 using System;
+using Components;
 using Controllers;
 using Definitions;
 using Systems;
@@ -39,10 +40,10 @@ namespace Player
         {
             if (((1 << other.gameObject.layer) & branchLayer) == 0)
                 return;
-            
-            Debug.Log("Collision Enter");
-            
-            Die();
+
+            var branchSide = other.transform.GetComponentInParent<TreeSegment>().BranchSide;
+            if (_gameplayController.playerSide == branchSide)
+                Die();
         }
 
         public void Die()

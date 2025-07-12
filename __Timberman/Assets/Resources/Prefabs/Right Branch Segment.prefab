@@ -128,10 +128,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207462468942569880, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
       propertyPath: m_Name
-      value: Segment Left Branch
+      value: Right Branch Segment
       objectReference: {fileID: 0}
     - target: {fileID: 4207462468942569880, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265106982916842178, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
+      propertyPath: branchSide
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

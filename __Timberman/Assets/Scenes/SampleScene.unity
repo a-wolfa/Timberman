@@ -1532,8 +1532,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130e30fb4c6657243b89555191809ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftPrefab: {fileID: 7868186288292553883, guid: 6a82115df4742ed46989178a35be5cae, type: 3}
-  rightPrefab: {fileID: 3508494406105668027, guid: e09b019c8adac88499677fb862441ff1, type: 3}
+  leftPrefab: {fileID: 3508494406105668027, guid: e09b019c8adac88499677fb862441ff1, type: 3}
+  rightPrefab: {fileID: 7868186288292553883, guid: 6a82115df4742ed46989178a35be5cae, type: 3}
   nonePrefab: {fileID: 4207462468942569880, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
 --- !u!1 &1693778974
 GameObject:

@@ -21,8 +21,9 @@ namespace Controllers
         [Inject] private readonly TimerExpiredSignal _timerExpiredSignal;
         
         [SerializeField] private CollisionHandler collisionHandler;
-        
         [SerializeField] private ThrowMode throwMode;
+
+        public Side playerSide = Side.Left;
         
 
         private void Update()
@@ -44,7 +45,7 @@ namespace Controllers
                 _systemContainer.RequestToDeactivateSystem<TSystem>();
         }
 
-        public void Die()
+        private void Die()
         {
             collisionHandler.Die();
         }

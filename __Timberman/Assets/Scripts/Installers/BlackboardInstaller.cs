@@ -63,14 +63,14 @@ namespace Installers
             Container.Bind<InputSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<InputSystem>().FromResolve();
             
+            Container.Bind<MovementSystem>().AsSingle();
+            Container.Bind<BaseSystem>().To<MovementSystem>().FromResolve();
+            
             Container.Bind<AnimationSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<AnimationSystem>().FromResolve();
             
             Container.Bind<ChoppingSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<ChoppingSystem>().FromResolve();
-            
-            Container.Bind<MovementSystem>().AsSingle();
-            Container.Bind<BaseSystem>().To<MovementSystem>().FromResolve();
             
             Container.Bind<TreeManagementSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<TreeManagementSystem>().FromResolve();
