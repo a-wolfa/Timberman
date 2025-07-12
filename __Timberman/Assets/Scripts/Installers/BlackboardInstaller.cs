@@ -1,7 +1,11 @@
 using Blackboard;
 using Controllers;
+using Definitions;
+using Resolvers;
 using Services;
 using Signals;
+using Strategies.ThrowStrategies;
+using Strategies.ThrowStrategies.Abstractions;
 using Systems;
 using Systems.Abstractions;
 using Systems.Data;
@@ -45,6 +49,8 @@ namespace Installers
             
             AddAnimator();
             AddPlayer();
+            
+            AddThrow();
         }
 
         private void AddSystems()
@@ -156,6 +162,13 @@ namespace Installers
         private void AddPlayer()
         {
             Container.Bind<GameObject>().FromInstance(playerPrefab).NonLazy();
+        }
+        
+        public void AddThrow()
+        {
+            Container.Bind<IThrow>().WithId(ThrowMode.DoThrow).To<DoThrow>().AsSingle();
+            Container.Bind<IThrow>().WithId(ThrowMode.RbThrow).To<RbThrow>().AsSingle();
+            Container.Bind<ThrowResolver>().AsSingle();
         }
         
     }

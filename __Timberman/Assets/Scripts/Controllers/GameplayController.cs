@@ -3,7 +3,9 @@ using System.Timers;
 using Blackboard;
 using Definitions;
 using Player;
+using Resolvers;
 using Signals;
+using Strategies.ThrowStrategies.Abstractions;
 using Systems;
 using Systems.Abstractions;
 using UnityEngine;
@@ -15,10 +17,13 @@ namespace Controllers
     {
         [Inject] private readonly SystemContainer _systemContainer;
         [Inject] private readonly DataContainer _dataContainer;
-        
+        [Inject] ThrowResolver _throwResolver;
         [Inject] private readonly TimerExpiredSignal _timerExpiredSignal;
         
         [SerializeField] private CollisionHandler collisionHandler;
+        
+        [SerializeField] private ThrowMode throwMode;
+        
 
         private void Update()
         {
@@ -42,6 +47,11 @@ namespace Controllers
         public void Die()
         {
             collisionHandler.Die();
+        }
+
+        public IThrow GetThrowStrategy()
+        {
+            return _throwResolver.ResolveThrowType(throwMode);
         }
     }
 }
