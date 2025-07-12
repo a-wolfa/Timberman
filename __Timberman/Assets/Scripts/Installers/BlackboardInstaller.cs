@@ -53,6 +53,11 @@ namespace Installers
             AddThrow();
         }
 
+        public override void Start()
+        {
+            Container.Resolve<SystemContainer>().InitActiveSystems();
+        }
+
         private void AddSystems()
         {
             Container.Bind<InputSystem>().AsSingle();

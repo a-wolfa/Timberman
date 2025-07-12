@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionHandler: {fileID: 1693778978}
-  throwMode: 1
+  throwMode: 0
 --- !u!1 &221880545
 GameObject:
   m_ObjectHideFlags: 0

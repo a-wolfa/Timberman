@@ -24,13 +24,12 @@ namespace Blackboard
             
             _systemsToActivate = new List<BaseSystem>();
             _systemsToDeactivate = new List<BaseSystem>();
-            
-            Initialize();
         }
 
-        private void Initialize()
+        public void InitActiveSystems()
         {
             RequestToDeactivateSystem<ChoppingSystem>();
+            RequestToDeactivateSystem<TimerSystem>();
             DeactivateSystems();
         }
 

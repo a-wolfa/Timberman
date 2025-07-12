@@ -16,54 +16,53 @@ namespace Systems
         private readonly Transform _treeOrigin;
         private readonly TreeSegmentManagerFactory _treeSegmentManagerFactory;
 
-        private float _segmentHeight = 2.56f;
+        private readonly float _segmentHeight = 2.56f;
         private List<TreeSegment> _segments;
+
+        private Side _previousGeneratedSide = Side.Left;
+        private Vector3 _previousGeneratedPosition;
         
         public TreeManagementSystem(
             TreeData treeData, 
             [Inject(Id = "Root")]Transform treeOrigin,
-            TreeSegmentManagerFactory treeSegmentManagerFactory
-            )
+            TreeSegmentManagerFactory treeSegmentManagerFactory, List<TreeSegment> segments)
         {
             _treeData = treeData;
             _treeOrigin = treeOrigin;
             _treeSegmentManagerFactory = treeSegmentManagerFactory;
+            _segments = segments;
         }
 
         public void InitTree(int count = 10)
         {
             _segments  = new List<TreeSegment>();
-            Side previousSide = Side.Right;
 
             for (int i = 0; i < count; i++)
             {
-                Side side;
-                
-
-                if (previousSide != Side.None)
-                {
-                    // Force a normal (no branch) after a branch
-                    side = Side.None;
-                }
-                else
-                {
-                    // Randomly choose between None, Left, Right
-                    side = GetRandomBranchSide();
-                }
-                
-                Debug.Log(side.ToString());
-
                 Vector3 position = _treeOrigin.position + Vector3.up * i * _segmentHeight;
-                
-                TreeSegment segment = _treeSegmentManagerFactory.Create(side, position);
-                segment.transform.SetParent(_treeOrigin);
-                
-                _segments.Add(segment);
-
-                previousSide = side;
+                GenerateSegment(position);
             }
             
         }
+
+        public void GenerateSegment(Vector3 position = default)
+        {
+            var side = _previousGeneratedSide != Side.None ? Side.None : GetRandomBranchSide();
+            
+            if (position == default)
+            {
+                position = _previousGeneratedPosition;
+            }
+            
+            var segment = _treeSegmentManagerFactory.Create(side, position);
+            segment.transform.SetParent(_treeOrigin);
+                
+            _segments.Add(segment);
+            
+            _previousGeneratedSide = side;
+            _previousGeneratedPosition = position;
+        }
+        
 
         public override void Update()
         {
@@ -74,7 +73,10 @@ namespace Systems
 
         private void MoveTreeSegmentsDown()
         {
-            _treeOrigin.DOMoveY(_treeOrigin.position.y - _segmentHeight, .1f);
+            _treeOrigin.DOMoveY(_treeOrigin.position.y - _segmentHeight, .1f).onComplete += () =>
+            {
+                GenerateSegment();
+            };
         }
 
         private Side GetRandomBranchSide()
