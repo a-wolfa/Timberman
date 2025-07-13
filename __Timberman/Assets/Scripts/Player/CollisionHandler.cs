@@ -5,11 +5,14 @@ using Definitions;
 using Systems;
 using UnityEngine;
 using Zenject;
+using Zenject.SpaceFighter;
 
 namespace Player
 {
     public class CollisionHandler : MonoBehaviour
     {
+        private SignalBus _signalBus;
+        
         private GameObject _tombstone;
         private SpriteRenderer _spriteRenderer;
         [SerializeField] private LayerMask branchLayer;
@@ -24,6 +27,12 @@ namespace Player
         {
             InitRefs();
             InitComponents();
+        }
+
+        [Inject]
+        private void Construct(SignalBus signalBus)
+        {
+            _signalBus = signalBus;
         }
 
         private void InitComponents()
@@ -53,7 +62,6 @@ namespace Player
             
             _gameplayController.SendActivationRequest<InputSystem>(RequestMode.Deactivation);
             _gameplayController.SendActivationRequest<TimerSystem>(RequestMode.Deactivation);
-            
         }
     }
 }

@@ -5,34 +5,28 @@ using Signals;
 
 namespace Services
 {
-    public class AudioService : IInitializable, IDisposable
+    public class AudioService
     {
         private AudioSource _audioSource;
         private AudioClip _chopSound;
-        private SegmentChoppedSignal _segmentChoppedSignal;
+        private SignalBus _signalBus;
 
         [Inject]
-        public void Construct(SegmentChoppedSignal segmentChoppedSignal, 
+        public void Construct(SignalBus signalBus, 
                             [Inject(Id = "ChopAudioSource")] AudioSource audioSource, 
                             [Inject(Id = "ChopSound")] AudioClip chopSound)
         {
-            _segmentChoppedSignal = segmentChoppedSignal;
+            _signalBus = signalBus;
             _audioSource = audioSource;
             _chopSound = chopSound;
         }
 
-        public void Initialize()
+        public void Init()
         {
-            _segmentChoppedSignal.Subscribe(OnSegmentChopped);
+            _signalBus.Subscribe<ChoppedSignal>(OnSegmentChopped);
         }
 
-        public void Dispose()
-        {
-            _segmentChoppedSignal?.Unsubscribe(OnSegmentChopped);
-            _audioSource = null;
-        }
-
-        private void OnSegmentChopped(int points)
+        private void OnSegmentChopped(ChoppedSignal choppedSignal)
         {
             if (_audioSource != null && _chopSound != null)
             {

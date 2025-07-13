@@ -17,9 +17,9 @@ namespace Systems
         
         private readonly TreeData _treeData;
         private readonly MovementData _movementData;
+        private readonly SignalBus _signalBus;
         
         GameplayController _gameplayController;
-        private readonly SegmentChoppedSignal _segmentChoppedSignal;
         
         private TreeSegment _bottomSegment;
         
@@ -27,14 +27,14 @@ namespace Systems
 
         public ChoppingSystem(TreeData treeData,
             GameplayController gameplayController,
-            SegmentChoppedSignal segmentChoppedSignal,
+            SignalBus signalBus,
             [Inject(Id = "Root")] Transform treeRoot,
             MovementData movementData)
         {
             _treeData = treeData;
             _movementData = movementData;
             _gameplayController = gameplayController;
-            _segmentChoppedSignal = segmentChoppedSignal;
+            _signalBus = signalBus;
             _treeRoot = treeRoot;
         }
 
@@ -49,7 +49,7 @@ namespace Systems
             var throwStrategy =  _gameplayController.GetThrowStrategy();
             throwStrategy.Throw(_bottomSegment, _movementData.CurrentSide);
             
-            _segmentChoppedSignal.Fire();
+            _signalBus.Fire(new ChoppedSignal());
             _treeData.ShouldMoveTree = true;
             
             _gameplayController.SendActivationRequest<ChoppingSystem>(RequestMode.Deactivation);

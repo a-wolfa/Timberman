@@ -21,7 +21,10 @@ namespace Systems
             _inputData = inputData;
             _signalBus = signalBus;
             _inputStrategy = inputStrategy;
+        }
 
+        public void Init()
+        {
             _signalBus.Subscribe<InputPerformedSignal>(OnInputPerformed);
             _inputStrategy.Enable();
         }
@@ -29,12 +32,10 @@ namespace Systems
         private void OnInputPerformed(InputPerformedSignal signal)
         {
             _pendingDirection = (int)signal.Direction;
-            Debug.Log($"Direction: {_pendingDirection}");
         }
 
         public override void Update()
         {
-            Debug.Log($"Direction: {_pendingDirection}");
             if (_pendingDirection == 0)
                 return;
             

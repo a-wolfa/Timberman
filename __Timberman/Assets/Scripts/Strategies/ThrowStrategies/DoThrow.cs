@@ -12,7 +12,7 @@ namespace Strategies.ThrowStrategies
         {
             var startPosition = segment.transform.position;
             segment.transform.DOMove(
-                startPosition + new Vector3(-1 * (int)side, 0.8f, 0) * 20, 
+                startPosition + new Vector3(-1 * (int)side, 0.5f, 0) * 20, 
                 1.5f)
                     .OnComplete(() => segment.Despawn());
             

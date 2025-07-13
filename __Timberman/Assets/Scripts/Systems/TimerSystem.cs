@@ -9,27 +9,28 @@ namespace Systems
 {
     public class TimerSystem : BaseSystem
     {
-        [Inject] private readonly TimerExpiredSignal _timerExpiredSignal;
-
         private readonly TimerData _timerData;
         private readonly TimerView _timerView;
+        private readonly SignalBus _signalBus;
 
         private float _currentTime;
-        private float _maxTime = 5;
+        private float _maxTime = 10;
 
-        public TimerSystem(TimerData timerData, TimerView timerView)
+        public TimerSystem(
+            TimerData timerData, 
+            TimerView timerView, 
+            SignalBus signalBus)
         {
             _timerData = timerData;
             _timerView = timerView;
-
-            _timerData.StartTimer(5);
-            
-            Init();
+            _signalBus = signalBus;
         }
 
-        private void Init()
-        {
-            _currentTime = _maxTime;
+        public void Init()
+        {   
+            _signalBus.Subscribe<ChoppedSignal>(ChargeTimer);
+            _timerData.StartTimer(_maxTime/2);
+            _currentTime = _maxTime/2;
         }
 
         public override void Update()
@@ -45,8 +46,13 @@ namespace Systems
             else
             {
                 Debug.Log("Timer Expired");
-                _timerExpiredSignal.Fire();
+                _signalBus.Fire<TimerExpiredSignal>();
             }
+        }
+
+        private void ChargeTimer(ChoppedSignal choppedSignal)
+        {
+            _currentTime = Mathf.Min(_currentTime + .2f, _maxTime);
         }
 
     }

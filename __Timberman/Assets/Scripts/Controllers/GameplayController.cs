@@ -18,7 +18,7 @@ namespace Controllers
         [Inject] private readonly SystemContainer _systemContainer;
         [Inject] private readonly DataContainer _dataContainer;
         [Inject] ThrowResolver _throwResolver;
-        [Inject] private readonly TimerExpiredSignal _timerExpiredSignal;
+        [Inject] private readonly SignalBus _signalBus;
         
         [SerializeField] private CollisionHandler collisionHandler;
         [SerializeField] private ThrowMode throwMode;
@@ -34,7 +34,7 @@ namespace Controllers
 
         private void OnEnable()
         {
-            _timerExpiredSignal.Subscribe(Die);
+            _signalBus.Subscribe<TimerExpiredSignal>(Die);
         }
 
         public void SendActivationRequest<TSystem>(RequestMode request)  where TSystem : BaseSystem

@@ -6,36 +6,30 @@ using UI.Views;
 
 namespace UI.Presenters
 {
-    public class ScorePresenter : IInitializable, IDisposable
+    public class ScorePresenter
     {
         private readonly ScoreService _scoreService;
         private readonly ScoreView _scoreView;
-        private readonly SegmentChoppedSignal _segmentChoppedSignal;
+        private readonly SignalBus _signalBus;
         
-        [Inject]
         public ScorePresenter(ScoreService scoreService, 
-                             ScoreView scoreView, 
-                             SegmentChoppedSignal segmentChoppedSignal)
+                                ScoreView scoreView, 
+                                SignalBus segmentChoppedSignal)
         {
             _scoreService = scoreService;
             _scoreView = scoreView;
-            _segmentChoppedSignal = segmentChoppedSignal;
+            _signalBus = segmentChoppedSignal;
         }
-        
-        public void Initialize()
+
+        public void Init()
         {
-            _segmentChoppedSignal.Subscribe(OnSegmentChopped);
+            _signalBus.Subscribe<ChoppedSignal>(OnSegmentChopped);
             UpdateScoreDisplay();
         }
         
-        public void Dispose()
+        private void OnSegmentChopped(ChoppedSignal choppedSignal)
         {
-            _segmentChoppedSignal?.Unsubscribe(OnSegmentChopped);
-        }
-        
-        private void OnSegmentChopped(int points)
-        {
-            _scoreService.AddPoints(points);
+            _scoreService.AddPoints(1);
             UpdateScoreDisplay();
         }
         

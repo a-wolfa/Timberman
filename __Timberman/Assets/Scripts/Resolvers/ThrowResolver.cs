@@ -17,7 +17,6 @@ namespace Resolvers
         public IThrow ResolveThrowType(ThrowMode mode)
         {
             var strategy = _container.ResolveId<IThrow>(mode);
-            Debug.Log($"Resolved throw strategy: {strategy.GetType().Name} for mode: {mode}");
             return strategy;
         }
     }

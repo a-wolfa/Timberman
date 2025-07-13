@@ -54,6 +54,11 @@ namespace Installers
         public override void Start()
         {
             Container.Resolve<SystemContainer>().InitActiveSystems();
+            Container.Resolve<AudioService>().Init();
+            Container.Resolve<InputSystem>().Init();
+            Container.Resolve<TimerSystem>().Init();
+            Container.Resolve<ScorePresenter>().Init();
+            
         }
 
         private void AddSystems()
@@ -82,14 +87,15 @@ namespace Installers
             Container.Bind<InputData>().AsSingle();
             Container.Bind<BaseData>().To<InputData>().FromResolve();
             
+            Container.Bind<MovementData>().AsSingle();
+            Container.Bind<BaseData>().To<MovementData>().FromResolve();
+            
             Container.Bind<TreeData>().AsSingle();
             Container.Bind<BaseData>().To<TreeData>().FromResolve();
             
             Container.Bind<TimerData>().AsSingle();
             Container.Bind<BaseData>().To<TimerData>().FromResolve();
             
-            Container.Bind<MovementData>().AsSingle();
-            Container.Bind<BaseData>().To<MovementData>().FromResolve();
         }
 
         private void AddContainers()
@@ -118,13 +124,11 @@ namespace Installers
         
         private void AddSignals()
         {
-            Container.Bind<SegmentChoppedSignal>().AsSingle();
-            Container.Bind<TimerExpiredSignal>().AsSingle();
-            
-            
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<InputPerformedSignal>();
-            
+            Container.DeclareSignal<ChoppedSignal>();
+            Container.DeclareSignal<TimerExpiredSignal>();
+
         }
 
         private void AddInput()
@@ -132,19 +136,15 @@ namespace Installers
 #if UNITY_EDITOR
             Container.Bind<IInputStrategy>()
                 .To<KeyboardInputStrategy>()
-                .AsSingle()
-                .WithArguments(inputActionAsset, Container.Resolve<SignalBus>());
+                .AsSingle();
 #elif UNITY_ANDROID
             Container.Bind<IInputStrategy>()
-            .To<TouchInputStrategy>()
-            .AsSingle()
-            .WithArguments(inputActionAsset, Container.Resolve<SignalBus>());
+                .To<TouchInputStrategy>()
+                .AsSingle();
 #else
-            // Optionally add fallback binding
             Container.Bind<IInputStrategy>()
-            .To<KeyboardInputStrategy>()
-            .AsSingle()
-            .WithArguments(inputActionAsset, Container.Resolve<SignalBus>());
+                .To<KeyboardInputStrategy>()
+                .AsSingle();
 #endif
         }
 

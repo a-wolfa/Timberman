@@ -12,7 +12,6 @@ namespace Systems.Data
         
         public void StartTimer(float duration)
         {
-            Debug.Log("StartTimer");
             InitialTime = duration;
             CurrentTime = duration;
             IsActive = true;
