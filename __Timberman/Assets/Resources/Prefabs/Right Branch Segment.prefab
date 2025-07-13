@@ -118,18 +118,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919625543236311662, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919625543236311662, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 63f1bbe075482ec4ea2126258d80cb28, type: 3}
-    - target: {fileID: 919625543236311662, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4207462468942569880, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
       propertyPath: m_Name
       value: Right Branch Segment

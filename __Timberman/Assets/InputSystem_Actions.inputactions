@@ -6,10 +6,28 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "KeyboardMove",
                     "type": "Value",
                     "id": "2776c80d-3c14-4091-8c56-d04ced07a2b0",
                     "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchTap",
+                    "type": "Button",
+                    "id": "961a8a07-ab05-4cda-837c-d15b85e78bc6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchPosition",
+                    "type": "Value",
+                    "id": "a9ebbaec-96a4-472c-93bd-2ca04e05b6e3",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -23,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "KeyboardMove",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -34,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Move",
+                    "action": "KeyboardMove",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -45,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Move",
+                    "action": "KeyboardMove",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -56,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Move",
+                    "action": "KeyboardMove",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -67,9 +85,53 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Move",
+                    "action": "KeyboardMove",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9030c47b-4c78-42c4-b01d-be93c68b1254",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "TouchTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aeb9a161-d459-40b1-9bae-e0332a38b142",
+                    "path": "<Mouse>/press",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "TouchTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ab5342a-90c4-4a8b-a392-b1b87dbc7c51",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9a274b42-20ab-4ef8-9244-3c3e5010696f",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

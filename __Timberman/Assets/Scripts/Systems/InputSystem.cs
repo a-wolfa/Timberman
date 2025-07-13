@@ -1,43 +1,52 @@
-using Definitions;
+using System;
+using Signals;
 using Systems.Abstractions;
 using Systems.Data;
+using Strategies.InputStrategy.Abstractions;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Systems
 {
-    public class InputSystem : BaseSystem
+    public class InputSystem : BaseSystem, IDisposable
     {
         private readonly InputData _inputData;
-        private readonly InputAction _chopInput;
+        private readonly SignalBus _signalBus;
+        private readonly IInputStrategy _inputStrategy;
 
-        private float _chopDirection;
-        
-        public InputSystem(InputData inputData, InputActionAsset inputAsset)
+        private float _pendingDirection;
+
+        public InputSystem(InputData inputData, SignalBus signalBus, IInputStrategy inputStrategy)
         {
             _inputData = inputData;
-            
-            var playerInputMap = inputAsset.FindActionMap("Player");
-            _chopInput = playerInputMap.FindAction("Move");
+            _signalBus = signalBus;
+            _inputStrategy = inputStrategy;
 
-            _chopInput.performed += OnChopInputPressed;
-            
-            _chopInput.Enable();
+            _signalBus.Subscribe<InputPerformedSignal>(OnInputPerformed);
+            _inputStrategy.Enable();
+        }
+
+        private void OnInputPerformed(InputPerformedSignal signal)
+        {
+            _pendingDirection = (int)signal.Direction;
+            Debug.Log($"Direction: {_pendingDirection}");
         }
 
         public override void Update()
         {
-            if (_chopDirection == 0)
+            Debug.Log($"Direction: {_pendingDirection}");
+            if (_pendingDirection == 0)
                 return;
             
-            _inputData.ChopDirection = (int)_chopDirection;
-            _chopDirection = 0;
+            _inputData.ChopDirection = (int)_pendingDirection;
+
+            _pendingDirection = 0;
         }
 
-        private void OnChopInputPressed(InputAction.CallbackContext context)
+        public void Dispose()
         {
-            _chopDirection = context.ReadValue<float>();
+            _signalBus.Unsubscribe<InputPerformedSignal>(OnInputPerformed);
+            _inputStrategy.Disable();
         }
     }
 }

@@ -4,6 +4,8 @@ using Definitions;
 using Resolvers;
 using Services;
 using Signals;
+using Strategies.InputStrategy;
+using Strategies.InputStrategy.Abstractions;
 using Strategies.ThrowStrategies;
 using Strategies.ThrowStrategies.Abstractions;
 using Systems;
@@ -34,22 +36,18 @@ namespace Installers
         public override void InstallBindings()
         {
             AddSignals();
+            AddInput();
             AddAudio();
             AddUI();
             AddServices();
-            
             AddData();
             AddSystems();
-            
             AddInputAsset();
             AddContainers();
-            
             AddTree();
             AddController();
-            
             AddAnimator();
             AddPlayer();
-            
             AddThrow();
         }
 
@@ -77,7 +75,6 @@ namespace Installers
             
             Container.Bind<TimerSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<TimerSystem>().FromResolve();
-            // Add other systems here
         }
 
         private void AddData()
@@ -123,7 +120,34 @@ namespace Installers
         {
             Container.Bind<SegmentChoppedSignal>().AsSingle();
             Container.Bind<TimerExpiredSignal>().AsSingle();
+            
+            
+            SignalBusInstaller.Install(Container);
+            Container.DeclareSignal<InputPerformedSignal>();
+            
         }
+
+        private void AddInput()
+        {
+#if UNITY_EDITOR
+            Container.Bind<IInputStrategy>()
+                .To<KeyboardInputStrategy>()
+                .AsSingle()
+                .WithArguments(inputActionAsset, Container.Resolve<SignalBus>());
+#elif UNITY_ANDROID
+            Container.Bind<IInputStrategy>()
+            .To<TouchInputStrategy>()
+            .AsSingle()
+            .WithArguments(inputActionAsset, Container.Resolve<SignalBus>());
+#else
+            // Optionally add fallback binding
+            Container.Bind<IInputStrategy>()
+            .To<KeyboardInputStrategy>()
+            .AsSingle()
+            .WithArguments(inputActionAsset, Container.Resolve<SignalBus>());
+#endif
+        }
+
         
         private void AddAudio()
         {
@@ -178,6 +202,5 @@ namespace Installers
             Container.Bind<IThrow>().WithId(ThrowMode.RbThrow).To<RbThrow>().AsSingle();
             Container.Bind<ThrowResolver>().AsSingle();
         }
-        
     }
 }
