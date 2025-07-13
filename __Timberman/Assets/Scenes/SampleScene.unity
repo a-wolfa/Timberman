@@ -1632,6 +1632,7 @@ GameObject:
   - component: {fileID: 1374314758}
   - component: {fileID: 1374314760}
   - component: {fileID: 1374314761}
+  - component: {fileID: 1374314762}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1655,6 +1656,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1374314760}
   - {fileID: 1374314761}
+  - {fileID: 1374314762}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1722,6 +1724,18 @@ MonoBehaviour:
   leftPrefab: {fileID: 3508494406105668027, guid: e09b019c8adac88499677fb862441ff1, type: 3}
   rightPrefab: {fileID: 7868186288292553883, guid: 6a82115df4742ed46989178a35be5cae, type: 3}
   nonePrefab: {fileID: 4207462468942569880, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
+--- !u!114 &1374314762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374314757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc75eb9f295617048b15908e5543962b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1682205908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,6 +1747,7 @@ GameObject:
   - component: {fileID: 1682205909}
   - component: {fileID: 1682205910}
   - component: {fileID: 1682205911}
+  - component: {fileID: 1682205912}
   m_Layer: 5
   m_Name: Tap Icons
   m_TagString: Untagged
@@ -1779,7 +1794,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 70
+  m_Spacing: 42.3
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -1809,6 +1824,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1682205912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682205908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca105ba708e413fadba7e2726e2967d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1693778974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,6 +1960,50 @@ MonoBehaviour:
   branchLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!1 &1753798123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1753798125}
+  - component: {fileID: 1753798124}
+  m_Layer: 0
+  m_Name: GameState Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1753798124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753798123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc79d2e333d24669a97dbb3b5727dea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1753798125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753798123}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.20454809, y: 1.4226639, z: -0.072051525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1757102351
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,6 +2331,7 @@ SceneRoots:
   - {fileID: 221880548}
   - {fileID: 776779563}
   - {fileID: 138695489}
+  - {fileID: 1753798125}
   - {fileID: 1374314759}
   - {fileID: 1089005897}
   - {fileID: 370490040}
