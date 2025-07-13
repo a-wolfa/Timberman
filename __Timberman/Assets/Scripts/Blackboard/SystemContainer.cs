@@ -29,6 +29,7 @@ namespace Blackboard
         public void InitActiveSystems()
         {
             RequestToDeactivateSystem<ChoppingSystem>();
+            RequestToDeactivateSystem<TimerSystem>();
             DeactivateSystems();
         }
 

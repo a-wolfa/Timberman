@@ -1,6 +1,6 @@
 using Controllers;
+using Definitions;
 using GameStates.Abstraction;
-using Services;
 using Signals;
 using Systems;
 using Zenject;
@@ -9,22 +9,28 @@ namespace GameStates
 {
     public class ReadyState : IGameState
     {
-        [Inject]
-        private readonly SignalBus _signalBus;
+        [Inject] private readonly SignalBus _signalBus;
+        [Inject] private readonly GameStateController _gameStateController;
+        [Inject] private readonly GameplayController _gameController;
+
+        public void Init()
+        {
+            _signalBus.Subscribe<InputPerformedSignal>(StartGame);
+        }
         
         public void Enter(GameStateController stateController)
-        {
-            _signalBus.Fire<InputPerformedSignal>();
-        }
+        { }
 
         public void Update(GameStateController stateController)
-        {
-            
-        }
+        { }
 
         public void Exit(GameStateController stateController)
+        { }
+
+        private void StartGame()
         {
-            
+            _gameController.SendActivationRequest<TimerSystem>(RequestMode.Activation);
+            _signalBus.Unsubscribe<InputPerformedSignal>(StartGame);
         }
     }
 }
