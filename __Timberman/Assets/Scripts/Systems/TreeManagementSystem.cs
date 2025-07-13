@@ -17,7 +17,6 @@ namespace Systems
         private readonly TreeSegmentManagerFactory _treeSegmentManagerFactory;
 
         private readonly float _segmentHeight = 2.56f;
-        private List<TreeSegment> _segments;
 
         private Side _previousGeneratedSide = Side.Left;
         private Vector3 _previousGeneratedPosition;
@@ -30,12 +29,11 @@ namespace Systems
             _treeData = treeData;
             _treeOrigin = treeOrigin;
             _treeSegmentManagerFactory = treeSegmentManagerFactory;
-            _segments = segments;
         }
 
         public void InitTree(int count = 10)
         {
-            _segments  = new List<TreeSegment>();
+            _treeData.Segments  = new List<TreeSegment>();
 
             for (int i = 0; i < count; i++)
             {
@@ -57,12 +55,11 @@ namespace Systems
             var segment = _treeSegmentManagerFactory.Create(side, position);
             segment.transform.SetParent(_treeOrigin);
                 
-            _segments.Add(segment);
+            _treeData.Segments.Add(segment);
             
             _previousGeneratedSide = side;
             _previousGeneratedPosition = position;
         }
-        
 
         public override void Update()
         {

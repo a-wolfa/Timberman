@@ -1,25 +1,23 @@
 using Components;
+using Pools;
 using UnityEngine;
 using Zenject;
 
 namespace Factories.Abstractions
 {
-    public abstract class BaseSegmentFactory : IFactory
+    public abstract class BaseSegmentFactory<TPool> : IFactory<Vector3, TreeSegment>
+        where TPool : IMemoryPool<Vector3, TreeSegment>
     {
-        protected readonly DiContainer Container;
-        protected readonly GameObject Prefab;
+        protected readonly TPool Pool;
 
-        protected BaseSegmentFactory(DiContainer container, GameObject prefab)
+        protected BaseSegmentFactory(TPool pool)
         {
-            Container = container;
-            Prefab = prefab;
+            Pool = pool;
         }
 
         public TreeSegment Create(Vector3 position)
         {
-            var instance = Container.InstantiatePrefabForComponent<TreeSegment>(Prefab);
-            instance.transform.position = position;
-            return instance;
+            return Pool.Spawn(position);
         }
     }
 }

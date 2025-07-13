@@ -21,7 +21,7 @@ namespace Systems
         GameplayController _gameplayController;
         private readonly SegmentChoppedSignal _segmentChoppedSignal;
         
-        private GameObject _lowestSegment;
+        private TreeSegment _bottomSegment;
         
         private Rigidbody2D _rb2D;
 
@@ -40,35 +40,19 @@ namespace Systems
 
         public override void Update()
         {
-            _lowestSegment = _treeRoot.transform.GetChild(0).gameObject;
+            _bottomSegment = _treeData.Segments[0];
+            _bottomSegment.transform.SetParent(null);
+            _treeData.Segments.RemoveAt(0);
+            
             _gameplayController.playerSide = _movementData.CurrentSide;
-            _lowestSegment.transform.SetParent(null);
             
             var throwStrategy =  _gameplayController.GetThrowStrategy();
-            throwStrategy.Throw(_lowestSegment, _movementData.CurrentSide);
+            throwStrategy.Throw(_bottomSegment, _movementData.CurrentSide);
             
-            Object.Destroy(_lowestSegment,2);
-            
-            _segmentChoppedSignal.Fire(1);
+            _segmentChoppedSignal.Fire();
             _treeData.ShouldMoveTree = true;
             
             _gameplayController.SendActivationRequest<ChoppingSystem>(RequestMode.Deactivation);
-        }
-
-        private void ThrowSegments()
-        {
-            Rigidbody2D rb = _lowestSegment.GetComponent<Rigidbody2D>();
-            rb.bodyType = RigidbodyType2D.Dynamic;
-            rb.gravityScale = 1f;
-            
-            rb.AddForce(Vector2.one  * 10f, ForceMode2D.Impulse);
-            
-            Object.Destroy(_lowestSegment,2);
-        }
-
-        private void ThrowSegments(bool usingDoTween)
-        {
-            _lowestSegment.Throw();
         }
     }
 }

@@ -1,12 +1,13 @@
 using Factories.Abstractions;
+using Pools;
 using UnityEngine;
 using Zenject;
 
 namespace Factories
 {
-    public class LeftBranchSegmentFactory : BaseSegmentFactory
+    public class LeftBranchSegmentFactory : BaseSegmentFactory<LeftBranchSegmentPool>
     {
-        public LeftBranchSegmentFactory(DiContainer container, [Inject(Id = "LeftPrefab")] GameObject prefab)
-            : base(container, prefab) { }
+        public LeftBranchSegmentFactory(LeftBranchSegmentPool pool)
+            : base(pool) { }
     }
 }

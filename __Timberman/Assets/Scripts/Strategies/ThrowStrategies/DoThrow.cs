@@ -1,3 +1,4 @@
+using Components;
 using Definitions;
 using DG.Tweening;
 using Strategies.ThrowStrategies.Abstractions;
@@ -7,12 +8,14 @@ namespace Strategies.ThrowStrategies
 {
     public class DoThrow : IThrow
     {
-        public void Throw(GameObject go, Side side)
+        public void Throw(TreeSegment segment, Side side)
         {
-            var startPosition = go.transform.position;
-            go.transform.DOMove(
+            var startPosition = segment.transform.position;
+            segment.transform.DOMove(
                 startPosition + new Vector3(-1 * (int)side, 0.8f, 0) * 20, 
-                1.5f);
+                1.5f)
+                    .OnComplete(() => segment.Despawn());
+            
             Debug.Log("Throw using DoTween");
         }
     }
