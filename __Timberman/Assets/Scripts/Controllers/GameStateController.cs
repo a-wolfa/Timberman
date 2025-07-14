@@ -8,7 +8,7 @@ namespace Controllers
 {
     public class GameStateController : MonoBehaviour
     {
-        private IGameState _currentState;
+        private BaseGameState _currentState;
         
         private GameplayController _gameplayController;
         
@@ -23,7 +23,7 @@ namespace Controllers
             _currentState = new ReadyState();
         }
 
-        public void ChangeState(IGameState gameState)
+        public void ChangeState(BaseGameState gameState)
         {
             _currentState?.Exit(this);
             _currentState = gameState;

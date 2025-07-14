@@ -26,7 +26,7 @@ namespace Installers
         private void AddStates()
         {
             Container.Bind<ReadyState>().AsSingle();
-            Container.Bind<IGameState>().To<ReadyState>().FromResolve();
+            Container.Bind<BaseGameState>().To<ReadyState>().FromResolve();
         }
     }
 }

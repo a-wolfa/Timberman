@@ -7,7 +7,7 @@ using Zenject;
 
 namespace GameStates
 {
-    public class ReadyState : IGameState
+    public class ReadyState : BaseGameState
     {
         [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly GameStateController _gameStateController;
@@ -17,14 +17,14 @@ namespace GameStates
         {
             _signalBus.Subscribe<InputPerformedSignal>(StartGame);
         }
-        
-        public void Enter(GameStateController stateController)
+
+        public override void Enter(GameStateController stateController)
         { }
 
-        public void Update(GameStateController stateController)
+        public override void Update(GameStateController stateController)
         { }
 
-        public void Exit(GameStateController stateController)
+        public override void Exit(GameStateController stateController)
         { }
 
         private void StartGame()

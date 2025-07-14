@@ -1,3 +1,4 @@
+using Data;
 using Signals;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -11,7 +12,8 @@ namespace Factories.Player
         private readonly DiContainer _container;
         private readonly SignalBus _signalBus;
         
-        private const string PlayerAddress = "Prefabs/Player/Player";
+        
+        private ThemeData _themeData;
         
         public GameObject PlayerInstance { get; private set; }
 
@@ -19,11 +21,14 @@ namespace Factories.Player
         {
             _container = container;
             _signalBus = signalBus;
+            
+            _signalBus.Subscribe<ThemeSelectedSignal>(Create);
         }
 
-        public void Create()
+        public void Create(ThemeSelectedSignal signal)
         {
-            Addressables.LoadAssetAsync<GameObject>(PlayerAddress).Completed += OnPrefabLoaded;
+            _themeData = signal.ThemeData;
+            _themeData.Player.prefab.LoadAssetAsync().Completed += OnPrefabLoaded;
         }
 
         private void OnPrefabLoaded(AsyncOperationHandle<GameObject> handle)

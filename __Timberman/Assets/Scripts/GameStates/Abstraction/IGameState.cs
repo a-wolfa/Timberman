@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace GameStates.Abstraction
 {
-    public interface IGameState
+    public abstract class BaseGameState
     {
-        void Enter(GameStateController stateController);
+        public abstract void Enter(GameStateController stateController);
         
-        void Update(GameStateController stateController);
+        public abstract void Update(GameStateController stateController);
         
-        void Exit(GameStateController stateController);
+        public abstract void Exit(GameStateController stateController);
     }
 }

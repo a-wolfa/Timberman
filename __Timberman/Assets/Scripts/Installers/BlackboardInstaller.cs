@@ -127,7 +127,7 @@ namespace Installers
             Container.DeclareSignal<InputPerformedSignal>();
             Container.DeclareSignal<ChoppedSignal>();
             Container.DeclareSignal<TimerExpiredSignal>();
-
+            Container.DeclareSignal<ThemeSelectedSignal>();
         }
 
         private void AddInput()

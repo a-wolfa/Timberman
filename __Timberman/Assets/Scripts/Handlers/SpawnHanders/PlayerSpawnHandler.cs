@@ -14,7 +14,7 @@ namespace Handlers.SpawnHanders
         
         public void Initialize()
         {
-            _factory.Create();
+            //_factory.Create();
         }
     }
 }
