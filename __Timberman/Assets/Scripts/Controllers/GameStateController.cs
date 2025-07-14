@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GameStates;
 using GameStates.Abstraction;
 using UnityEngine;
@@ -8,15 +9,16 @@ namespace Controllers
 {
     public class GameStateController : MonoBehaviour
     {
+        private BaseGameSate[] _gameSates;
+        
         private BaseGameSate _currentSate;
-        private GameplayController _gameplayController;
         
         [Inject] private readonly DiContainer _container;
         
         [Inject]
-        public void Construct(GameplayController gameplayController)
+        public void Construct(BaseGameSate[] gameSates)
         {
-            _gameplayController = gameplayController;
+            _gameSates = gameSates;
         }
 
         private void Start()
@@ -34,7 +36,13 @@ namespace Controllers
 
         private void Update()
         {
+            Debug.Log(_currentSate);
             _currentSate.Update(this);
+        }
+
+        public BaseGameSate GetGameSate<TState>() where TState : BaseGameSate 
+        {
+            return _gameSates.FirstOrDefault(state => state is TState);
         }
     }
 }

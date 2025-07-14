@@ -13,7 +13,6 @@ namespace Systems
     {
         private readonly InputData _inputData;
         private readonly MovementData _movementData;
-        private readonly PlayerFactory _playerFactory;
         private readonly SignalBus _signalBus;
         
         private GameObject _player;
@@ -21,12 +20,10 @@ namespace Systems
         public MovementSystem(
             InputData inputData, 
             MovementData movementData,
-            PlayerFactory playerFactory,
             SignalBus signalBus
             )
         {
             _inputData = inputData;
-            _playerFactory = playerFactory;
             _movementData = movementData;
             _signalBus = signalBus;
         }

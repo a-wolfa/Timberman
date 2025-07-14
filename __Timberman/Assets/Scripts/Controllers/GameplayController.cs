@@ -67,7 +67,7 @@ namespace Controllers
 
         private void OnThemeSelected()
         {
-            _gameStateController.ChangeState(new ReadySate());
+            _gameStateController.ChangeState(_gameStateController.GetGameSate<ReadySate>());
         }
     }
 }

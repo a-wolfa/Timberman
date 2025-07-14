@@ -31,6 +31,8 @@ namespace Installers
             Container.Bind<ThemeSelectionSate>().AsTransient();
             Container.Bind<BaseGameSate>().To<ThemeSelectionSate>().FromResolve();
 
+            Container.Bind<PlayingState>().AsTransient();
+            Container.Bind<BaseGameSate>().To<PlayingState>().FromResolve();
         }
     }
 }

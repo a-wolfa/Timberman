@@ -2,18 +2,19 @@ using Controllers;
 using Definitions;
 using GameStates.Abstraction;
 using Systems;
-using Zenject;
 
 namespace GameStates
 {
-    public class ThemeSelectionSate : BaseGameSate
+    public class PlayingState : BaseGameSate
     {
-        public ThemeSelectionSate(GameplayController gameplayController, GameStateController gameStateController) 
+        public PlayingState(GameplayController gameplayController, GameStateController gameStateController) 
             : base(gameplayController,  gameStateController)
         { }
 
         public override void Enter(GameStateController stateController)
-        { }
+        {
+            GameplayController.SendActivationRequest<TimerSystem>(RequestMode.Activation);
+        }
 
         public override void Update(GameStateController stateController)
         {
@@ -22,7 +23,7 @@ namespace GameStates
 
         public override void Exit(GameStateController stateController)
         {
-            GameplayController.SendActivationRequest<InputSystem>(RequestMode.Activation);
+            
         }
     }
 }
