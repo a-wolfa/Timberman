@@ -10,19 +10,19 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            AddPlayer();
-            AddAnimator();
+            var player = Container.InstantiatePrefab(playerPrefab);
+            AddPlayer(player);
+            AddAnimator(player);
         }
 
-
-        private void AddPlayer()
+        private void AddPlayer(GameObject playerInstance)
         {
-            Container.Bind<GameObject>().FromInstance(playerPrefab).NonLazy();
+            Container.Bind<GameObject>().FromInstance(playerInstance).NonLazy();
         }
-        
-        private void AddAnimator()
+
+        private void AddAnimator(GameObject playerInstance)
         {
-            var playerAnimator = playerPrefab.GetComponentInChildren<Animator>();
+            var playerAnimator = playerInstance.GetComponentInChildren<Animator>();
             Container.Bind<Animator>()
                 .FromInstance(playerAnimator)
                 .AsSingle()

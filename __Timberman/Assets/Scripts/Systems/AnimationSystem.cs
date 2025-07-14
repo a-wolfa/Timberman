@@ -18,6 +18,7 @@ namespace Systems
         
         public override void Update()
         {
+            Debug.Log(_animator);
             _animator.SetInteger(AnimNames.PlayerChopAnimation, _inputData.ChopDirection);
         }
     }
