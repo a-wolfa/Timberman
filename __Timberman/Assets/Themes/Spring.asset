@@ -29,7 +29,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
   TreeSegments:
   - prefab:
-      m_AssetGUID: 6ae4eda065aeeed499e24c313b3a0835
+      m_AssetGUID: ebe1c8f252ccc614c82a62cdfdc5b058
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
@@ -43,9 +43,9 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     Side: 0
   - prefab:
-      m_AssetGUID: ebe1c8f252ccc614c82a62cdfdc5b058
+      m_AssetGUID: 6ae4eda065aeeed499e24c313b3a0835
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
-      m_EditorAssetChanged: 1
+      m_EditorAssetChanged: 0
     Side: 1

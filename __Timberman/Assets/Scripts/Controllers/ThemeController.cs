@@ -1,6 +1,9 @@
 using System;
 using Data;
 using Definitions;
+using Factories.Tree;
+using Handlers.Environment;
+using Handlers.Player;
 using Signals;
 using UnityEngine;
 using Zenject;
@@ -11,16 +14,9 @@ namespace Controllers
     {
         [Inject] private SignalBus _signalBus;
         
-        [SerializeField] private ThemeData themeData;
-
-        private void OnEnable()
-        {
-            _signalBus.Subscribe<ThemeSelectedSignal>(OnThemeSelected);
-        }
-
-        private void OnThemeSelected(ThemeSelectedSignal signal)
-        {
-            themeData = signal.ThemeData;
-        }
+        [Inject] private PlayerFactory _playerFactory;
+        [Inject] private TreeFactory _treeFactory;
+        [Inject] private EnvironmentFactory _environmentFactory;
+        
     }
 }

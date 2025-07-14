@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: branchSide
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 667015036814332732, guid: 6a82115df4742ed46989178a35be5cae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 667015036814332732, guid: 6a82115df4742ed46989178a35be5cae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5258284698080181610, guid: 6a82115df4742ed46989178a35be5cae, type: 3}
       propertyPath: m_Sprite
       value: 

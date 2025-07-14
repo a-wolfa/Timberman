@@ -1,10 +1,9 @@
 using System;
 using Components;
 using Definitions;
-using Factories.Abstractions;
 using UnityEngine;
 
-namespace Factories.FactoryManagers
+namespace Factories.Tree.FactoryManagers
 {
     public class TreeSegmentManagerFactory
     {

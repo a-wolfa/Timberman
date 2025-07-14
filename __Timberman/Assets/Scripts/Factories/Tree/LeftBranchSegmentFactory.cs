@@ -1,13 +1,12 @@
-using Factories.Abstractions;
+using Factories.Tree.Abstractions;
 using Pools;
-using UnityEngine;
 using Zenject;
 
-namespace Factories
+namespace Factories.Tree
 {
     public class LeftBranchSegmentFactory : BaseSegmentFactory<LeftBranchSegmentPool>
     {
-        public LeftBranchSegmentFactory(LeftBranchSegmentPool pool)
-            : base(pool) { }
+        public LeftBranchSegmentFactory(DiContainer container)
+            : base(container) { }
     }
 }

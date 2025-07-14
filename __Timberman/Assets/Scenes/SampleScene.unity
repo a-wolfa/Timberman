@@ -1798,9 +1798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130e30fb4c6657243b89555191809ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftPrefab: {fileID: 3508494406105668027, guid: e09b019c8adac88499677fb862441ff1, type: 3}
-  rightPrefab: {fileID: 7868186288292553883, guid: 6a82115df4742ed46989178a35be5cae, type: 3}
-  nonePrefab: {fileID: 4207462468942569880, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
 --- !u!114 &1374314762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,67 +2249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171dc44e739c9fe4599edf4191362ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1793363137
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4998464755605726081, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_Name
-      value: WinterForest
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624349826579186201, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6678351881189005784, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
-      propertyPath: m_SortingLayer
-      value: -1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5ad8c1ac65c028f42927815006d49bcd, type: 3}
 --- !u!1 &1858414901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2452,7 +2388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16405ba67dc140442b7abdde40514c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  themeData: {fileID: 0}
 --- !u!4 &2039493851
 Transform:
   m_ObjectHideFlags: 0
@@ -2486,4 +2421,3 @@ SceneRoots:
   - {fileID: 2031459453}
   - {fileID: 1264954773}
   - {fileID: 1858414902}
-  - {fileID: 1793363137}

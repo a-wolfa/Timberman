@@ -1,5 +1,4 @@
-using Factories.Player;
-using Handlers.SpawnHanders;
+using Handlers.Player;
 using Zenject;
 
 namespace Installers

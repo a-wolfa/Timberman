@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using Components;
 using Definitions;
 using DG.Tweening;
-using Factories.FactoryManagers;
+using Factories.Tree;
+using Factories.Tree.FactoryManagers;
 using Systems.Abstractions;
 using Systems.Data;
 using UnityEngine;
@@ -24,7 +25,9 @@ namespace Systems
         public TreeManagementSystem(
             TreeData treeData, 
             [Inject(Id = "Root")]Transform treeOrigin,
-            TreeSegmentManagerFactory treeSegmentManagerFactory, List<TreeSegment> segments)
+            TreeSegmentManagerFactory treeSegmentManagerFactory, 
+            List<TreeSegment> segments,
+            TreeFactory treeFactory)
         {
             _treeData = treeData;
             _treeOrigin = treeOrigin;
@@ -34,7 +37,6 @@ namespace Systems
         public void InitTree(int count = 10)
         {
             _treeData.Segments  = new List<TreeSegment>();
-
             for (int i = 0; i < count; i++)
             {
                 Vector3 position = _treeOrigin.position + Vector3.up * i * _segmentHeight;

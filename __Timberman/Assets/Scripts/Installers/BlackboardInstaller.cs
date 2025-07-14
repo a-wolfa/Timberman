@@ -2,6 +2,7 @@ using Blackboard;
 using Controllers;
 using Definitions;
 using Handlers;
+using Handlers.Environment;
 using Resolvers;
 using Services;
 using Signals;
@@ -46,6 +47,7 @@ namespace Installers
             AddTree();
             AddController();
             AddThrow();
+            AddEnvironment();
         }
 
         public override void Start()
@@ -57,6 +59,11 @@ namespace Installers
             Container.Resolve<ScorePresenter>().Init();
             Container.Resolve<MovementSystem>().Init();
             Container.Resolve<AnimationSystem>().Init();
+        }
+
+        private void AddEnvironment()
+        {
+            Container.Bind<EnvironmentFactory>().AsSingle();
         }
 
         private void AddSystems()

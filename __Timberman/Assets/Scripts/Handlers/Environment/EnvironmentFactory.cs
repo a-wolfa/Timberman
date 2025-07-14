@@ -1,23 +1,21 @@
 using Data;
 using Signals;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Zenject;
 
-namespace Factories.Player
+namespace Handlers.Environment
 {
-    public class PlayerFactory
+    public class EnvironmentFactory
     {
         private readonly DiContainer _container;
         private readonly SignalBus _signalBus;
         
-        
-        private ThemeData _themeData;
-        
-        public GameObject PlayerInstance { get; private set; }
+        private ThemeData _theme;
 
-        public PlayerFactory(DiContainer container, SignalBus signalBus)
+        private GameObject PlayerInstance { get; set; }
+
+        public EnvironmentFactory(DiContainer container, SignalBus signalBus)
         {
             _container = container;
             _signalBus = signalBus;
@@ -25,10 +23,10 @@ namespace Factories.Player
             _signalBus.Subscribe<ThemeSelectedSignal>(Create);
         }
 
-        public void Create(ThemeSelectedSignal signal)
+        private void Create(ThemeSelectedSignal signal)
         {
-            _themeData = signal.ThemeData;
-            _themeData.Player.prefab.LoadAssetAsync().Completed += OnPrefabLoaded;
+            _theme = signal.ThemeData;
+            _theme.Forest.prefab.LoadAssetAsync().Completed += OnPrefabLoaded;
         }
 
         private void OnPrefabLoaded(AsyncOperationHandle<GameObject> handle)
@@ -41,8 +39,6 @@ namespace Factories.Player
             
             GameObject prefab = handle.Result;
             PlayerInstance = _container.InstantiatePrefab(prefab);
-            
-            _signalBus.Fire(new PlayerCreatedSignal(PlayerInstance));
         }
     }
 }
