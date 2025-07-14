@@ -30,8 +30,6 @@ namespace Installers
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip chopSoundClip;
         [SerializeField] private TextMeshProUGUI scoreText;
-        [SerializeField] private GameObject playerPrefab;
-        [SerializeField] private Animator playerAnimator;
         
         public override void InstallBindings()
         {
@@ -46,8 +44,6 @@ namespace Installers
             AddContainers();
             AddTree();
             AddController();
-            AddAnimator();
-            AddPlayer();
             AddThrow();
         }
 
@@ -181,19 +177,6 @@ namespace Installers
             
             // Other services
             Container.BindInterfacesAndSelfTo<AudioService>().AsSingle();
-        }
-        
-        private void AddAnimator()
-        {
-            Container.Bind<Animator>()
-                .FromInstance(playerAnimator)
-                .AsSingle()
-                .WhenInjectedInto<AnimationSystem>();
-        }
-        
-        private void AddPlayer()
-        {
-            Container.Bind<GameObject>().FromInstance(playerPrefab).NonLazy();
         }
         
         public void AddThrow()
