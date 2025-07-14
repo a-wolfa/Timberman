@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1ef921bcc390145932f99f612c8d73, type: 3}
+  m_Name: Spring
+  m_EditorClassIdentifier: 
+  theme: 1
+  Forest:
+    prefab:
+      m_AssetGUID: ccb68e947c8e42f428a4c6a0ad4dd9d4
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  Player:
+    prefab:
+      m_AssetGUID: c4e0be952a0d5dc49b6f976b9eac225b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  TreeSegments:
+  - prefab:
+      m_AssetGUID: 6ae4eda065aeeed499e24c313b3a0835
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    Side: -1
+  - prefab:
+      m_AssetGUID: 042c114b6f95c034ba824e3920838e2e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    Side: 0
+  - prefab:
+      m_AssetGUID: ebe1c8f252ccc614c82a62cdfdc5b058
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+    Side: 1

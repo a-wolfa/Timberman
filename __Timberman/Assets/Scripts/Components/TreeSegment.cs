@@ -13,6 +13,7 @@ namespace Components
         
         [SerializeField] private Side branchSide;
         public Side BranchSide { get => branchSide; set => branchSide = value; }
+        public Theme Theme { get => Theme; set => Theme = value; }
 
         public void SetPool(IMemoryPool pool)
         {

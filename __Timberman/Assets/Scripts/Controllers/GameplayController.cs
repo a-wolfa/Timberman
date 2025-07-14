@@ -2,7 +2,7 @@ using System;
 using System.Timers;
 using Blackboard;
 using Definitions;
-using Player;
+using Handlers;
 using Resolvers;
 using Signals;
 using Strategies.ThrowStrategies.Abstractions;
@@ -20,12 +20,13 @@ namespace Controllers
         [Inject] ThrowResolver _throwResolver;
         [Inject] private readonly SignalBus _signalBus;
         
-        [SerializeField] private CollisionHandler collisionHandler;
         [SerializeField] private ThrowMode throwMode;
 
-        public Side playerSide = Side.Left;
+        private CollisionHandler _collisionHandler;
         
-
+        public Side playerSide = Side.Left;
+        public Theme theme = Theme.Spring;
+        
         private void Update()
         {
             _systemContainer.Update();
@@ -35,6 +36,7 @@ namespace Controllers
         private void OnEnable()
         {
             _signalBus.Subscribe<TimerExpiredSignal>(Die);
+            _signalBus.Subscribe<PlayerCreatedSignal>(OnPlayerCreate);
         }
 
         public void SendActivationRequest<TSystem>(RequestMode request)  where TSystem : BaseSystem
@@ -47,12 +49,17 @@ namespace Controllers
 
         private void Die()
         {
-            collisionHandler.Die();
+            _collisionHandler.Die();
         }
 
         public IThrow GetThrowStrategy()
         {
             return _throwResolver.ResolveThrowType(throwMode);
+        }
+
+        private void OnPlayerCreate(PlayerCreatedSignal signal)
+        {
+            _collisionHandler = signal.Player.GetComponent<CollisionHandler>();
         }
     }
 }

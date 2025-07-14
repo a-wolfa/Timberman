@@ -15,8 +15,33 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: cf812c22c33b0964b8bc9e4f8d55d936
   m_SerializeEntries:
+  - m_GUID: 2bbcc5d726b5afa45b0a126b4916c638
+    m_Address: Prefabs/Tree/Spring Tree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ad8c1ac65c028f42927815006d49bcd
+    m_Address: Prefabs/Environment/WinterForest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a70c0e9ac07e49942b8a63815c2a8699
+    m_Address: Prefabs/Tree/WinterTree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6bdc27ab038dd749a719fa98d4daddc
+    m_Address: Prefabs/Player/WinterPlayer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c4e0be952a0d5dc49b6f976b9eac225b
-    m_Address: Prefabs/Player/Player
+    m_Address: Prefabs/Player/SpringPlayer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ccb68e947c8e42f428a4c6a0ad4dd9d4
+    m_Address: Prefabs/Environment/SpringForest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

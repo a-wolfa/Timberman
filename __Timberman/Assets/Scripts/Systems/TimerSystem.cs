@@ -14,7 +14,7 @@ namespace Systems
         private readonly SignalBus _signalBus;
 
         private float _currentTime;
-        private float _maxTime = 10;
+        private float _maxTime = 8;
 
         public TimerSystem(
             TimerData timerData, 

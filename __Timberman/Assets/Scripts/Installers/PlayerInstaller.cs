@@ -1,5 +1,5 @@
 using Factories.Player;
-using Handlers;
+using Handlers.SpawnHanders;
 using Zenject;
 
 namespace Installers
@@ -12,4 +12,5 @@ namespace Installers
             Container.BindInterfacesTo<PlayerSpawnHandler>().AsSingle();
         }
     }
+    
 }
