@@ -7,11 +7,11 @@ using Zenject;
 
 namespace GameStates
 {
-    public class ReadyState : BaseGameState
+    public class ReadySate : BaseGameSate
     {
         [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly GameStateController _gameStateController;
-        [Inject] private readonly GameplayController _gameController;
+        [Inject] private readonly GameplayController _gameplayController;
 
         public void Init()
         {
@@ -29,7 +29,7 @@ namespace GameStates
 
         private void StartGame()
         {
-            _gameController.SendActivationRequest<TimerSystem>(RequestMode.Activation);
+            _gameplayController.SendActivationRequest<TimerSystem>(RequestMode.Activation);
             _signalBus.Unsubscribe<InputPerformedSignal>(StartGame);
         }
     }

@@ -30,6 +30,7 @@ namespace Blackboard
         {
             RequestToDeactivateSystem<ChoppingSystem>();
             RequestToDeactivateSystem<TimerSystem>();
+            RequestToDeactivateSystem<InputSystem>();
             DeactivateSystems();
         }
 

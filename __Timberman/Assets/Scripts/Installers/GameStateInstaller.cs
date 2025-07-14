@@ -15,7 +15,7 @@ namespace Installers
 
         public override void Start()
         {
-            Container.Resolve<ReadyState>().Init();
+            Container.Resolve<ReadySate>().Init();
         }
 
         private void AddControllers()
@@ -25,8 +25,12 @@ namespace Installers
 
         private void AddStates()
         {
-            Container.Bind<ReadyState>().AsSingle();
-            Container.Bind<BaseGameState>().To<ReadyState>().FromResolve();
+            Container.Bind<ReadySate>().AsTransient();
+            Container.Bind<BaseGameSate>().To<ReadySate>().FromResolve();
+            
+            Container.Bind<ThemeSelectionSate>().AsTransient();
+            Container.Bind<BaseGameSate>().To<ThemeSelectionSate>().FromResolve();
+
         }
     }
 }

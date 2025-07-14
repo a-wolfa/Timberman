@@ -2,6 +2,7 @@ using System;
 using System.Timers;
 using Blackboard;
 using Definitions;
+using GameStates;
 using Handlers;
 using Resolvers;
 using Signals;
@@ -19,6 +20,7 @@ namespace Controllers
         [Inject] private readonly DataContainer _dataContainer;
         [Inject] ThrowResolver _throwResolver;
         [Inject] private readonly SignalBus _signalBus;
+        [Inject] GameStateController _gameStateController;
         
         [SerializeField] private ThrowMode throwMode;
 
@@ -36,7 +38,8 @@ namespace Controllers
         private void OnEnable()
         {
             _signalBus.Subscribe<TimerExpiredSignal>(Die);
-            _signalBus.Subscribe<PlayerCreatedSignal>(OnPlayerCreate);
+            _signalBus.Subscribe<PlayerCreatedSignal>(OnPlayerCreated);
+            _signalBus.Subscribe<ThemeSelectedSignal>(OnThemeSelected);
         }
 
         public void SendActivationRequest<TSystem>(RequestMode request)  where TSystem : BaseSystem
@@ -57,9 +60,14 @@ namespace Controllers
             return _throwResolver.ResolveThrowType(throwMode);
         }
 
-        private void OnPlayerCreate(PlayerCreatedSignal signal)
+        private void OnPlayerCreated(PlayerCreatedSignal signal)
         {
             _collisionHandler = signal.Player.GetComponent<CollisionHandler>();
+        }
+
+        private void OnThemeSelected()
+        {
+            _gameStateController.ChangeState(new ReadySate());
         }
     }
 }

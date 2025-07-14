@@ -1,9 +1,10 @@
 using Controllers;
 using UnityEngine;
+using Zenject;
 
 namespace GameStates.Abstraction
 {
-    public abstract class BaseGameState
+    public abstract class BaseGameSate
     {
         public abstract void Enter(GameStateController stateController);
         

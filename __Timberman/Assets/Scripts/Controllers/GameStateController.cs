@@ -8,9 +8,10 @@ namespace Controllers
 {
     public class GameStateController : MonoBehaviour
     {
-        private BaseGameState _currentState;
-        
+        private BaseGameSate _currentSate;
         private GameplayController _gameplayController;
+        
+        [Inject] private readonly DiContainer _container;
         
         [Inject]
         public void Construct(GameplayController gameplayController)
@@ -20,19 +21,20 @@ namespace Controllers
 
         private void Start()
         {
-            _currentState = new ReadyState();
+            _currentSate = _container.Resolve<ThemeSelectionSate>();
+            _currentSate.Enter(this);
         }
 
-        public void ChangeState(BaseGameState gameState)
+        public void ChangeState(BaseGameSate baseGameSate)
         {
-            _currentState?.Exit(this);
-            _currentState = gameState;
-            _currentState.Enter(this);
+            _currentSate?.Exit(this);
+            _currentSate = baseGameSate;
+            _currentSate.Enter(this);
         }
 
         private void Update()
         {
-            _currentState.Update(this);
+            _currentSate.Update(this);
         }
     }
 }
