@@ -1,6 +1,7 @@
 using Blackboard;
 using Controllers;
 using Definitions;
+using Handlers;
 using Resolvers;
 using Services;
 using Signals;
@@ -54,7 +55,8 @@ namespace Installers
             Container.Resolve<InputSystem>().Init();
             Container.Resolve<TimerSystem>().Init();
             Container.Resolve<ScorePresenter>().Init();
-            
+            Container.Resolve<MovementSystem>().Init();
+            Container.Resolve<AnimationSystem>().Init();
         }
 
         private void AddSystems()
@@ -121,6 +123,7 @@ namespace Installers
         private void AddSignals()
         {
             SignalBusInstaller.Install(Container);
+            Container.DeclareSignal<PlayerCreatedSignal>();
             Container.DeclareSignal<InputPerformedSignal>();
             Container.DeclareSignal<ChoppedSignal>();
             Container.DeclareSignal<TimerExpiredSignal>();

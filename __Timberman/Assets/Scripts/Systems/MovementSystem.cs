@@ -1,8 +1,11 @@
 using Definitions;
+using Factories.Player;
+using Signals;
 using Systems.Abstractions;
 using Systems.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Systems
 {
@@ -10,15 +13,29 @@ namespace Systems
     {
         private readonly InputData _inputData;
         private readonly MovementData _movementData;
+        private readonly PlayerFactory _playerFactory;
+        private readonly SignalBus _signalBus;
         
         private GameObject _player;
 
-        public MovementSystem(InputData inputData, GameObject player, MovementData movementData)
+        public MovementSystem(
+            InputData inputData, 
+            MovementData movementData,
+            PlayerFactory playerFactory,
+            SignalBus signalBus
+            )
         {
             _inputData = inputData;
-            _player = player;
+            _playerFactory = playerFactory;
             _movementData = movementData;
+            _signalBus = signalBus;
         }
+
+        public void Init()
+        {
+            _signalBus.Subscribe<PlayerCreatedSignal>(OnPlayerCreated);
+        }
+        
         public override void Update()
         {
             var chopInput = _inputData.ChopDirection;
@@ -42,6 +59,12 @@ namespace Systems
             var scale = _player.transform.localScale;
             scale.x = -scale.x;
             _player.transform.localScale = scale;
+        }
+
+        private void OnPlayerCreated(PlayerCreatedSignal playerCreatedSignal)
+        {
+            _player = playerCreatedSignal.Player;
+            Debug.Log(_player.name + " created");
         }
     }
 }
