@@ -54,11 +54,10 @@ namespace Controllers
             switch (request)
             {
                 case RequestMode.Activation:
-                    
+                    _systemContainer.RequestToActivateSystem<TSystem>();
                     break;
                 case RequestMode.Deactivation:
-                    break;
-                default:
+                    _systemContainer.RequestToDeactivateSystem<TSystem>();
                     break;
             }
         }

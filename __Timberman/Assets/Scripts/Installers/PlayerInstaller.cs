@@ -7,8 +7,7 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<PlayerFactory>().AsSingle();
-            //Container.BindInterfacesTo<PlayerSpawnHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerFactory>().AsSingle();
         }
     }
     
