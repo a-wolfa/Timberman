@@ -42,18 +42,30 @@ namespace Controllers
             _signalBus.Subscribe<ThemeSelectedSignal>(OnThemeSelected);
         }
 
+        private void OnDisable()
+        {
+            _signalBus.Unsubscribe<TimerExpiredSignal>(Die);
+            _signalBus.Unsubscribe<PlayerCreatedSignal>(OnPlayerCreated);
+            _signalBus.Unsubscribe<ThemeSelectedSignal>(OnThemeSelected);
+        }
+
         public void SendActivationRequest<TSystem>(RequestMode request)  where TSystem : BaseSystem
         {
-            Debug.Log("SendActivationRequest");
-            if (request is RequestMode.Activation) 
-                _systemContainer.RequestToActivateSystem<TSystem>();
-            else if (request is RequestMode.Deactivation)
-                _systemContainer.RequestToDeactivateSystem<TSystem>();
+            switch (request)
+            {
+                case RequestMode.Activation:
+                    
+                    break;
+                case RequestMode.Deactivation:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void Die()
         {
-            _collisionHandler.Die();
+            _collisionHandler?.Die();
         }
 
         public IThrow GetThrowStrategy()
