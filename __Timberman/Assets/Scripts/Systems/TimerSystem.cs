@@ -14,7 +14,7 @@ namespace Systems
         private readonly SignalBus _signalBus;
 
         private float _currentTime;
-        private float _maxTime = 6;
+        private float _maxTime = 8;
 
         public TimerSystem(
             TimerData timerData, 
@@ -29,7 +29,6 @@ namespace Systems
         public void Init()
         {   
             _signalBus.Subscribe<ChoppedSignal>(ChargeTimer);
-            _timerData.StartTimer(_maxTime/2);
             _currentTime = _maxTime/2;
         }
 
@@ -52,7 +51,7 @@ namespace Systems
 
         private void ChargeTimer(ChoppedSignal choppedSignal)
         {
-            _currentTime = Mathf.Min(_currentTime + .25f, _maxTime);
+            _currentTime = Mathf.Min(_currentTime + .2f, _maxTime);
         }
 
     }

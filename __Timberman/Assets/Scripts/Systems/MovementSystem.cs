@@ -36,7 +36,7 @@ namespace Systems
         public override void Update()
         {
             var chopInput = _inputData.ChopDirection;
-         
+            Debug.Log("Chop Direction: " + chopInput);
             if (chopInput == 0)
                 return;
             
@@ -61,7 +61,6 @@ namespace Systems
         private void OnPlayerCreated(PlayerCreatedSignal playerCreatedSignal)
         {
             _player = playerCreatedSignal.Player;
-            Debug.Log(_player.name + " created");
         }
     }
 }

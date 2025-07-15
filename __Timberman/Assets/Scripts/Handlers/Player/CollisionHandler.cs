@@ -58,8 +58,12 @@ namespace Handlers
             _spriteRenderer.enabled = false;
             _tombstone.SetActive(true);
             
+            Debug.Log("Died");
+            
             _gameplayController.SendActivationRequest<InputSystem>(RequestMode.Deactivation);
             _gameplayController.SendActivationRequest<TimerSystem>(RequestMode.Deactivation);
+            _gameplayController.SendActivationRequest<MovementSystem>(RequestMode.Deactivation);
+            _gameplayController.SendActivationRequest<ChoppingSystem>(RequestMode.Deactivation);
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Systems
         private void OnPlayerCreated(PlayerCreatedSignal signal)
         {
             _animator = signal.Player.GetComponentInChildren<Animator>();
-            Debug.Log($"Player created: {_animator}");
         }
     }
 }

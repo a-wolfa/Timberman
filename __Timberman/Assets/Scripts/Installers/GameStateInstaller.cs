@@ -13,11 +13,6 @@ namespace Installers
             AddControllers();
         }
 
-        public override void Start()
-        {
-            Container.Resolve<ReadySate>().Init();
-        }
-
         private void AddControllers()
         {
             Container.Bind<GameStateController>().FromComponentInHierarchy().AsSingle();

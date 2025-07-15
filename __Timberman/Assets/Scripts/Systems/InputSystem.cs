@@ -14,7 +14,7 @@ namespace Systems
         private readonly SignalBus _signalBus;
         private readonly IInputStrategy _inputStrategy;
 
-        private float _pendingDirection;
+        private int _pendingDirection;
 
         public InputSystem(InputData inputData, SignalBus signalBus, IInputStrategy inputStrategy)
         {
@@ -39,8 +39,7 @@ namespace Systems
             if (_pendingDirection == 0)
                 return;
             
-            _inputData.ChopDirection = (int)_pendingDirection;
-
+            _inputData.ChopDirection = _pendingDirection;
             _pendingDirection = 0;
         }
 

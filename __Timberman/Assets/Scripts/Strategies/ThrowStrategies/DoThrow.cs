@@ -15,8 +15,6 @@ namespace Strategies.ThrowStrategies
                 startPosition + new Vector3(-1 * (int)side, 0.5f, 0) * 20, 
                 1.5f)
                     .OnComplete(() => segment.Despawn());
-            
-            Debug.Log("Throw using DoTween");
         }
     }
 }

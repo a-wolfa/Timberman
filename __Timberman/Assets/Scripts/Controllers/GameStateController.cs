@@ -13,7 +13,6 @@ namespace Controllers
         
         private BaseGameSate _currentSate;
         
-        [Inject] private readonly DiContainer _container;
         
         [Inject]
         public void Construct(BaseGameSate[] gameSates)
@@ -23,7 +22,7 @@ namespace Controllers
 
         private void Start()
         {
-            _currentSate = _container.Resolve<ThemeSelectionSate>();
+            _currentSate = GetGameSate<ThemeSelectionSate>();
             _currentSate.Enter(this);
         }
 
@@ -36,7 +35,6 @@ namespace Controllers
 
         private void Update()
         {
-            Debug.Log(_currentSate);
             _currentSate.Update(this);
         }
 

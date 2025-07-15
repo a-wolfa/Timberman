@@ -24,6 +24,8 @@ namespace Blackboard
             
             _systemsToActivate = new List<BaseSystem>();
             _systemsToDeactivate = new List<BaseSystem>();
+            
+            InitActiveSystems();
         }
 
         public void InitActiveSystems()
@@ -51,7 +53,11 @@ namespace Blackboard
         {
             ActivateSystems();
 
-            _activeSystems.ForEach(system => system.Update());
+            foreach (var system in _activeSystems)
+            {
+                system.Update();
+                Debug.Log(system.GetType().Name);
+            }
             
             DeactivateSystems();
         }

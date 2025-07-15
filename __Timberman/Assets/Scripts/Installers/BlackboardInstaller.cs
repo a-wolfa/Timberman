@@ -52,7 +52,6 @@ namespace Installers
 
         public override void Start()
         {
-            Container.Resolve<SystemContainer>().InitActiveSystems();
             Container.Resolve<AudioService>().Init();
             Container.Resolve<InputSystem>().Init();
             Container.Resolve<TimerSystem>().Init();
@@ -71,11 +70,11 @@ namespace Installers
             Container.Bind<InputSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<InputSystem>().FromResolve();
             
-            Container.Bind<MovementSystem>().AsSingle();
-            Container.Bind<BaseSystem>().To<MovementSystem>().FromResolve();
-            
             Container.Bind<AnimationSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<AnimationSystem>().FromResolve();
+            
+            Container.Bind<MovementSystem>().AsSingle();
+            Container.Bind<BaseSystem>().To<MovementSystem>().FromResolve();
             
             Container.Bind<ChoppingSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<ChoppingSystem>().FromResolve();

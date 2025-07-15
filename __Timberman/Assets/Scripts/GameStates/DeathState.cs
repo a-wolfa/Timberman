@@ -1,19 +1,18 @@
 using Controllers;
-using Definitions;
 using GameStates.Abstraction;
-using Systems;
-using Zenject;
 
 namespace GameStates
 {
-    public class ThemeSelectionSate : BaseGameSate
+    public class DeathState : BaseGameSate
     {
-        public ThemeSelectionSate(GameplayController gameplayController, GameStateController gameStateController) 
-            : base(gameplayController,  gameStateController)
+        public DeathState(GameplayController gameplayController, GameStateController stateController) 
+            : base(gameplayController, stateController)
         { }
 
         public override void Enter(GameStateController stateController)
-        { }
+        {
+            
+        }
 
         public override void Update(GameStateController stateController)
         {
@@ -22,6 +21,7 @@ namespace GameStates
 
         public override void Exit(GameStateController stateController)
         {
+            
         }
     }
 }

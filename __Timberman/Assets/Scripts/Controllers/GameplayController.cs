@@ -44,6 +44,7 @@ namespace Controllers
 
         public void SendActivationRequest<TSystem>(RequestMode request)  where TSystem : BaseSystem
         {
+            Debug.Log("SendActivationRequest");
             if (request is RequestMode.Activation) 
                 _systemContainer.RequestToActivateSystem<TSystem>();
             else if (request is RequestMode.Deactivation)

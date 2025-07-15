@@ -23,14 +23,14 @@ namespace Strategies.InputStrategy
 
         public void Enable()
         {
-            _touchTapAction.performed += OnTap;
+            _touchTapAction.started += OnTap;
             _touchTapAction.Enable();
             _touchPositionAction.Enable();
         }
 
         public void Disable()
         {
-            _touchTapAction.performed -= OnTap;
+            _touchTapAction.started -= OnTap;
             _touchTapAction.Disable();
             _touchPositionAction.Disable();
         }

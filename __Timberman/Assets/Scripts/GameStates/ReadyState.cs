@@ -15,14 +15,10 @@ namespace GameStates
         public ReadySate(GameplayController gameplayController, GameStateController gameStateController) 
             : base(gameplayController,  gameStateController)
         { }
-        
-        public void Init()
-        {
-            _signalBus.Subscribe<InputPerformedSignal>(StartGame);
-        }
 
         public override void Enter(GameStateController stateController)
         {
+            _signalBus.Subscribe<InputPerformedSignal>(StartGame);
         }
 
         public override void Update(GameStateController stateController)
@@ -34,7 +30,7 @@ namespace GameStates
         private void StartGame()
         {
             _signalBus.Unsubscribe<InputPerformedSignal>(StartGame);
-            Debug.Log(StateController);
+            GameplayController.SendActivationRequest<InputSystem>(RequestMode.Activation);
             StateController.ChangeState(StateController.GetGameSate<PlayingState>());
         }
     }
