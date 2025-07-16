@@ -1,5 +1,5 @@
 namespace Signals
 {
-    public struct SegmentChoppedSignal
+    public readonly struct SegmentChoppedSignal
     { }
 }

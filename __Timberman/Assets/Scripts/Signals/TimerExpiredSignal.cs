@@ -1,5 +1,5 @@
 namespace Signals
 {
-    public struct TimerExpiredSignal
+    public readonly struct TimerExpiredSignal
     { }
 }
