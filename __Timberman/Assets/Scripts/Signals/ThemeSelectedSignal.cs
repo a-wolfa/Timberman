@@ -2,7 +2,7 @@ using Data;
 
 namespace Signals
 {
-    public class ThemeSelectedSignal
+    public struct ThemeSelectedSignal
     {
         public ThemeData ThemeData { get; } 
         

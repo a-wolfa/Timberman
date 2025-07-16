@@ -3,9 +3,9 @@ using Zenject;
 
 namespace Signals
 {
-    public class PlayerCreatedSignal
+    public readonly struct PlayerCreatedSignal
     {
-        public GameObject Player { get; set; }
+        public GameObject Player { get; }
 
         public PlayerCreatedSignal(GameObject player)
         {

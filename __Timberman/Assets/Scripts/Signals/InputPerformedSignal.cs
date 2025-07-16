@@ -1,6 +1,6 @@
 namespace Signals
 {
-    public class InputPerformedSignal
+    public readonly struct InputPerformedSignal
     {
         public float Direction { get; }
      

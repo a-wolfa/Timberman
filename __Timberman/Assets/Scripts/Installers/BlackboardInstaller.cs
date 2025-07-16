@@ -131,7 +131,7 @@ namespace Installers
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<PlayerCreatedSignal>();
             Container.DeclareSignal<InputPerformedSignal>();
-            Container.DeclareSignal<ChoppedSignal>();
+            Container.DeclareSignal<SegmentChoppedSignal>();
             Container.DeclareSignal<TimerExpiredSignal>();
             Container.DeclareSignal<ThemeSelectedSignal>();
         }

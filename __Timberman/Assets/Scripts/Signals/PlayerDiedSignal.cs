@@ -1,5 +1,5 @@
 namespace Signals
 {
-    public class PlayerDiedSignal
+    public struct PlayerDiedSignal
     { }
 }

@@ -28,7 +28,7 @@ namespace Systems
 
         public void Init()
         {   
-            _signalBus.Subscribe<ChoppedSignal>(ChargeTimer);
+            _signalBus.Subscribe<SegmentChoppedSignal>(ChargeTimer);
             _currentTime = _maxTime/2;
         }
 
@@ -49,7 +49,7 @@ namespace Systems
             }
         }
 
-        private void ChargeTimer(ChoppedSignal choppedSignal)
+        private void ChargeTimer(SegmentChoppedSignal segmentChoppedSignal)
         {
             _currentTime = Mathf.Min(_currentTime + .2f, _maxTime);
         }

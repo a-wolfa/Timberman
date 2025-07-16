@@ -23,11 +23,11 @@ namespace UI.Presenters
 
         public void Init()
         {
-            _signalBus.Subscribe<ChoppedSignal>(OnSegmentChopped);
+            _signalBus.Subscribe<SegmentChoppedSignal>(OnSegmentChopped);
             UpdateScoreDisplay();
         }
         
-        private void OnSegmentChopped(ChoppedSignal choppedSignal)
+        private void OnSegmentChopped(SegmentChoppedSignal segmentChoppedSignal)
         {
             _scoreService.AddPoints(1);
             UpdateScoreDisplay();

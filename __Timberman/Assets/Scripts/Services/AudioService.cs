@@ -23,10 +23,10 @@ namespace Services
 
         public void Init()
         {
-            _signalBus.Subscribe<ChoppedSignal>(OnSegmentChopped);
+            _signalBus.Subscribe<SegmentChoppedSignal>(OnSegmentChopped);
         }
 
-        private void OnSegmentChopped(ChoppedSignal choppedSignal)
+        private void OnSegmentChopped(SegmentChoppedSignal segmentChoppedSignal)
         {
             if (_audioSource != null && _chopSound != null)
             {
