@@ -1,4 +1,5 @@
 using Components;
+using Signals;
 using Systems.Abstractions;
 using Systems.Data;
 using UnityEngine;
@@ -8,8 +9,7 @@ namespace Systems
 {
     public class ChoppingSystem : BaseSystem
     {
-        private Transform _treeRoot;
-
+        private readonly Transform _treeRoot;
         private readonly TreeData _treeData;
         private readonly MovementData _movementData;
         private readonly SignalBus _signalBus;
@@ -36,12 +36,12 @@ namespace Systems
             _treeData.Segments.RemoveAt(0);
 
             GameplayController.PlayerSide = _movementData.CurrentSide;
-
-            var throwStrategy = GameplayController.GetThrowStrategy();
-            throwStrategy.Throw(_bottomSegment, _movementData.CurrentSide);
+            
+            GameplayController.ThrowStrategy
+                .Throw(_bottomSegment, _movementData.CurrentSide);
             
             _treeData.ShouldMoveTree = true;
-
+            
             GameplayController.SendActivationRequest<ChoppingSystem>(false);
         }
     }

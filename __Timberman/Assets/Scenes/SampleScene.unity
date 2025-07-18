@@ -1595,7 +1595,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1374314759}
   - component: {fileID: 1374314758}
-  - component: {fileID: 1374314760}
   - component: {fileID: 1374314764}
   - component: {fileID: 1374314761}
   - component: {fileID: 1374314762}
@@ -1659,26 +1658,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1374314760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374314757}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58046c86dd434c53b51e0fb664fb7295, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActionAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  treeSegmentPrefab: {fileID: 4207462468942569880, guid: 44eed389ff3d06745903444cd91d372e, type: 3}
-  treeParent: {fileID: 1089005897}
-  audioSource: {fileID: 370490039}
-  chopSoundClip: {fileID: 8300000, guid: b9cd4fdc928a5c946a83fd504914fbc5, type: 3}
-  scoreText: {fileID: 1757102353}
-  gameBalanceConfig: {fileID: 11400000, guid: 5b03ef14d2b72ac4e98658a1273dc170, type: 2}
-  throwConfig: {fileID: 11400000, guid: c2cd805685969fc449a06e2f72d1d1d7, type: 2}
 --- !u!114 &1374314761
 MonoBehaviour:
   m_ObjectHideFlags: 0

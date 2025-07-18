@@ -35,7 +35,6 @@ namespace Installers
         {
             Container.Resolve<AudioService>().Init();
             Container.Resolve<InputSystem>().Init();
-            Container.Resolve<ScorePresenter>().Init();
             Container.Resolve<MovementSystem>().Init();
             Container.Resolve<AnimationSystem>().Init();
         }
@@ -70,9 +69,11 @@ namespace Installers
             Container.Bind<TimerView>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-
-            Container.Bind<ScoreView>()
+            
+            Container.BindInterfacesAndSelfTo<ScoreView>()
                 .FromComponentInHierarchy()
+                .AsSingle();
+            Container.BindInterfacesAndSelfTo<ScorePresenter>()
                 .AsSingle();
 
             Container.Bind<TapGroupView>()
@@ -80,9 +81,6 @@ namespace Installers
                 .AsSingle();
 
             Container.Bind<ScoreService>()
-                .AsSingle();
-
-            Container.BindInterfacesAndSelfTo<ScorePresenter>()
                 .AsSingle();
         }
 

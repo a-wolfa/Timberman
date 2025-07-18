@@ -25,12 +25,14 @@ namespace Controllers
         private void OnEnable()
         {
             _signalBus.Subscribe<PlayerDiedSignal>(OnPlayerDiedSignal);
+            _signalBus.Subscribe<TimerExpiredSignal>(OnPlayerDiedSignal);
             _currentSate.Enter();
         }
 
         private void OnDisable()
         {
             _signalBus.Unsubscribe<PlayerDiedSignal>(OnPlayerDiedSignal);
+            _signalBus.Unsubscribe<TimerExpiredSignal>(OnPlayerDiedSignal);
         }
 
         public void ChangeState<TGameState>() where TGameState : BaseGameSate

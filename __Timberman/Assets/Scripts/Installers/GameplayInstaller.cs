@@ -33,6 +33,7 @@ namespace Installers
             Container.DeclareSignal<ThemeSelectedSignal>();
             Container.DeclareSignal<PlayerDiedSignal>();
             Container.DeclareSignal<PoolTreeInitialized>();
+            Container.DeclareSignal<ScoreChangedSignal>();
         }
 
         private void AddInputStrategy()

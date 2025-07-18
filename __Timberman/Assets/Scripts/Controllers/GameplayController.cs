@@ -22,10 +22,18 @@ namespace Controllers
         [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly GameStateController _gameStateController;
         
-        [SerializeField] private ThrowMode throwMode;
+        [SerializeField] ThrowMode throwMode;
+        
+        public IThrow ThrowStrategy;
         
         public Side PlayerSide { get; set; } = Side.Left;
-        
+
+
+        private void Awake()
+        {
+            ThrowStrategy = GetThrowStrategy();
+        }
+
         private void OnEnable()
         {
             _signalBus.Subscribe<ThemeSelectedSignal>(OnThemeSelected);

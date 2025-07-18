@@ -15,9 +15,14 @@ namespace UI.Views
             _signalBus = signalBus;
         }
 
-        private void Start()
+        private void OnEnable()
         {
             _signalBus.Subscribe<InputPerformedSignal>(TurnOffVisuals);
+        }
+
+        private void OnDisable()
+        {
+            _signalBus.Unsubscribe<InputPerformedSignal>(TurnOffVisuals);
         }
 
         private void TurnOffVisuals()

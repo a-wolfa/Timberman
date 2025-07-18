@@ -2,8 +2,6 @@ using Blackboard;
 using Controllers;
 using Data;
 using Definitions;
-using Handlers;
-using Handlers.Environment;
 using Resolvers;
 using Services;
 using Signals;
@@ -17,7 +15,6 @@ using Systems.Data;
 using Systems.Data.Abstractions;
 using TMPro;
 using UI.Views;
-using UI.Presenters;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -58,17 +55,9 @@ namespace Installers
         {
             Container.Resolve<AudioService>().Init();
             Container.Resolve<InputSystem>().Init();
-            Container.Resolve<ScorePresenter>().Init();
             Container.Resolve<MovementSystem>().Init();
             Container.Resolve<AnimationSystem>().Init();
         }
-
-        public void AddExtensions()
-        {
-            
-        }
-
-        
 
         private void AddConfigs()
         {
@@ -194,7 +183,6 @@ namespace Installers
             // MVP Pattern for Score
             Container.Bind<ScoreService>().AsSingle();
             Container.Bind<ScoreView>().FromComponentInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<ScorePresenter>().AsSingle();
             
             // Other services
             Container.BindInterfacesAndSelfTo<AudioService>().AsSingle();
