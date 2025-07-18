@@ -61,7 +61,7 @@ namespace Factories.Tree
             }
             
             InstallTreeBindings(prefabs[Side.Left], prefabs[Side.Right],prefabs[Side.None]);
-            _container.Resolve<TreeManagementSystem>().InitTree();
+            _container.Resolve<TreeManagementSystem>().OnInitTree();
         }
 
         private void InstallTreeBindings(GameObject leftPrefab, GameObject rightPrefab, GameObject nonePrefab)

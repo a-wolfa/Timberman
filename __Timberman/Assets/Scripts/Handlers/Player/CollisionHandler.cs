@@ -1,6 +1,7 @@
 using Components;
 using Controllers;
 using Definitions;
+using Signals;
 using Systems;
 using UnityEngine;
 using Zenject;
@@ -9,39 +10,10 @@ namespace Handlers
 {
     public class CollisionHandler : MonoBehaviour
     {
-        private SignalBus _signalBus;
-        
-        private GameObject _tombstone;
-        private SpriteRenderer _spriteRenderer;
-        [SerializeField] private LayerMask branchLayer;
-        
+        [Inject] private SignalBus _signalBus;
         [Inject] private GameplayController _gameplayController;
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
-        {
-            InitRefs();
-            InitComponents();
-        }
-
-        [Inject]
-        private void Construct(SignalBus signalBus)
-        {
-            _signalBus = signalBus;
-        }
-
-        private void InitComponents()
-        {
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        }
-
-        private void InitRefs()
-        {
-            _tombstone = transform.GetChild(1).gameObject;
-        }
+        
+        [SerializeField] private LayerMask branchLayer;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -49,21 +21,8 @@ namespace Handlers
                 return;
 
             var branchSide = other.transform.GetComponentInParent<TreeSegment>().BranchSide;
-            if (_gameplayController.playerSide == branchSide)
-                Die();
-        }
-
-        public void Die()
-        {
-            _spriteRenderer.enabled = false;
-            _tombstone.SetActive(true);
-            
-            Debug.Log("Died");
-            
-            _gameplayController.SendActivationRequest<InputSystem>(RequestMode.Deactivation);
-            _gameplayController.SendActivationRequest<TimerSystem>(RequestMode.Deactivation);
-            _gameplayController.SendActivationRequest<MovementSystem>(RequestMode.Deactivation);
-            _gameplayController.SendActivationRequest<ChoppingSystem>(RequestMode.Deactivation);
+            if (_gameplayController.PlayerSide == branchSide)
+                _signalBus.Fire<PlayerDiedSignal>();
         }
     }
 }

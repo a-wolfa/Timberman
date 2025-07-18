@@ -15,23 +15,17 @@ namespace UI.Views
                 sliderBar.value = value;
         }
 
-        public void SetFill(float normalizedValue)
-        {
-            if (fillImage != null)
-                fillImage.fillAmount = normalizedValue;
-        }
-
-        public void InitializeUI(float maxTime)
+        public void InitializeUI(float maxTime, float startingTime)
         {
             if (sliderBar != null)
             {
                 sliderBar.minValue = 0f;
                 sliderBar.maxValue = maxTime;
-                sliderBar.value = maxTime;
+                sliderBar.value = startingTime/maxTime;
             }
 
             if (fillImage != null)
-                fillImage.fillAmount = 1f;
+                fillImage.fillAmount = sliderBar.value;
         }
     }
 }

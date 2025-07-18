@@ -36,7 +36,6 @@ namespace Systems
         public override void Update()
         {
             var chopInput = _inputData.ChopDirection;
-            Debug.Log("Chop Direction: " + chopInput);
             if (chopInput == 0)
                 return;
             

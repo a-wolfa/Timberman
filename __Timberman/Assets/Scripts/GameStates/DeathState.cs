@@ -1,25 +1,36 @@
-using Controllers;
-using GameStates.Abstraction;
+using GameStates.Abstractions;
+using Systems;
+using UnityEngine;
+using Zenject;
+using InputSystem = Systems.InputSystem;
 
 namespace GameStates
 {
-    public class DeathState : BaseGameSate
+    public class DeathState : BaseGameSate, IInitializable
     {
-        public DeathState(GameplayController gameplayController, GameStateController stateController) 
-            : base(gameplayController, stateController)
-        { }
+        public override void Enter()
+        {
+            Debug.Log("Entering Death State");
+            GameplayController.SendActivationRequest<InputSystem>(false);
+            GameplayController.SendActivationRequest<TimerSystem>(false);
+        }
 
-        public override void Enter(GameStateController stateController)
+        public override void Update()
         {
             
         }
 
-        public override void Update(GameStateController stateController)
+        public override void Exit()
         {
             
         }
 
-        public override void Exit(GameStateController stateController)
+        public override void OnEventChangeState()
+        {
+            
+        }
+
+        public void Initialize()
         {
             
         }

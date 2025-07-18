@@ -35,7 +35,6 @@ namespace Assets.Scripts.Installers
         {
             Container.Resolve<AudioService>().Init();
             Container.Resolve<InputSystem>().Init();
-            Container.Resolve<TimerSystem>().Init();
             Container.Resolve<ScorePresenter>().Init();
             Container.Resolve<MovementSystem>().Init();
             Container.Resolve<AnimationSystem>().Init();

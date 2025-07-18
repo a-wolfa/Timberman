@@ -1,5 +1,6 @@
 using Blackboard;
 using Controllers;
+using Data;
 using Definitions;
 using Handlers;
 using Handlers.Environment;
@@ -33,6 +34,9 @@ namespace Installers
         [SerializeField] private AudioClip chopSoundClip;
         [SerializeField] private TextMeshProUGUI scoreText;
         
+        [SerializeField] private GameBalanceConfig gameBalanceConfig;
+        [SerializeField] private ThrowConfig throwConfig;
+        
         public override void InstallBindings()
         {
             AddSignals();
@@ -48,21 +52,32 @@ namespace Installers
             AddController();
             AddThrow();
             AddEnvironment();
+            AddConfigs();
         }
 
         public override void Start()
         {
             Container.Resolve<AudioService>().Init();
             Container.Resolve<InputSystem>().Init();
-            Container.Resolve<TimerSystem>().Init();
             Container.Resolve<ScorePresenter>().Init();
             Container.Resolve<MovementSystem>().Init();
             Container.Resolve<AnimationSystem>().Init();
         }
 
+        public void AddExtensions()
+        {
+            
+        }
+
         private void AddEnvironment()
         {
             Container.Bind<EnvironmentFactory>().AsSingle();
+        }
+
+        private void AddConfigs()
+        {
+            Container.Bind<GameBalanceConfig>().FromInstance(gameBalanceConfig).AsSingle();
+            Container.Bind<ThrowConfig>().FromInstance(throwConfig).AsSingle();
         }
 
         private void AddSystems()
@@ -82,7 +97,7 @@ namespace Installers
             Container.Bind<TreeManagementSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<TreeManagementSystem>().FromResolve();
             
-            Container.Bind<TimerSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TimerSystem>().AsSingle();
             Container.Bind<BaseSystem>().To<TimerSystem>().FromResolve();
         }
 
@@ -99,7 +114,6 @@ namespace Installers
             
             Container.Bind<TimerData>().AsSingle();
             Container.Bind<BaseData>().To<TimerData>().FromResolve();
-            
         }
 
         private void AddContainers()
@@ -134,6 +148,8 @@ namespace Installers
             Container.DeclareSignal<SegmentChoppedSignal>();
             Container.DeclareSignal<TimerExpiredSignal>();
             Container.DeclareSignal<ThemeSelectedSignal>();
+            Container.DeclareSignal<PlayerDiedSignal>();
+            Container.DeclareSignal<PoolTreeInitialized>();
         }
 
         private void AddInput()

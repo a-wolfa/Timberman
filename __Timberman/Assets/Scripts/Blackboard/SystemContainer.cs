@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ModestTree;
@@ -11,47 +12,36 @@ namespace Blackboard
 {
     public class SystemContainer
     {
-        private readonly BaseSystem[] _systems;
+        private readonly BaseSystem[] _orderedSystems;
+        private readonly Dictionary<Type, BaseSystem> _systems;
         private List<BaseSystem> _activeSystems;
 
-        private List<BaseSystem> _systemsToActivate;
+        private readonly List<BaseSystem> _systemsToActivate;
         private readonly List<BaseSystem> _systemsToDeactivate;
 
         public SystemContainer(BaseSystem[] systems)
         {
-            _systems = systems;
-            _activeSystems = systems.ToList();
+            _orderedSystems = systems;
+            _systems = systems.ToDictionary(s => s.GetType(),  s => s);
             
+            _activeSystems = new List<BaseSystem>();
             _systemsToActivate = new List<BaseSystem>();
             _systemsToDeactivate = new List<BaseSystem>();
-            
-            InitActiveSystems();
         }
 
         public void InitActiveSystems()
         {
-            RequestToDeactivateSystem<ChoppingSystem>();
-            RequestToDeactivateSystem<TimerSystem>();
-            RequestToDeactivateSystem<InputSystem>();
-            DeactivateSystems();
+            RequestDeactivation<ChoppingSystem>();
+            RequestDeactivation<TimerSystem>();
+            RequestDeactivation<InputSystem>();
+            DeactivatePendingSystems();
         }
 
-        private void ActivateSystems()
-        {
-            _activeSystems.AddRange(_systemsToActivate);
-            _systemsToActivate.Clear();
-            _activeSystems = _activeSystems.OrderBy(system => _systems.IndexOf(system)).ToList();
-        }
-
-        private void DeactivateSystems()
-        {
-            _activeSystems.RemoveAll(system => _systemsToDeactivate.Contains(system));
-            _systemsToDeactivate.Clear();
-        }
+        
 
         public void Update()
         {
-            ActivateSystems();
+            ActivatePendingSystems();
 
             foreach (var system in _activeSystems)
             {
@@ -59,23 +49,47 @@ namespace Blackboard
                 Debug.Log(system.GetType().Name);
             }
             
-            DeactivateSystems();
+            DeactivatePendingSystems();
         }
-
-        public void RequestToActivateSystem<TSystem>()  where TSystem : BaseSystem
+        
+        private void ActivatePendingSystems()
         {
-            var systemToActivate = _systems.FirstOrDefault(system => system is TSystem);
-            _systemsToActivate.Add(systemToActivate);
-        }
-
-        public void RequestToDeactivateSystem<TSystem>() where TSystem : BaseSystem
-        {
-            var systemToDeactivate = _activeSystems.FirstOrDefault(system => system is TSystem);
-            
-            if (systemToDeactivate == null)
+            if (_systemsToActivate.Count == 0)
                 return;
             
-            _systemsToDeactivate.Add(systemToDeactivate);
+            _activeSystems.AddRange(_systemsToActivate);
+            _activeSystems = _activeSystems.OrderBy(s => Array.IndexOf(_orderedSystems, s)).ToList();
+            
+            _systemsToActivate.Clear();
+        }
+
+        private void DeactivatePendingSystems()
+        {
+            if (_systemsToDeactivate.Count == 0)
+                return;
+            
+            _activeSystems.RemoveAll(system => _systemsToDeactivate.Contains(system));
+            
+            _systemsToDeactivate.Clear();
+        }
+
+        public void RequestActivation<TSystem>()  where TSystem : BaseSystem
+        {
+            var system = _systems[typeof(TSystem)];
+            if (_activeSystems.Contains(system) || _systemsToActivate.Contains(system)) return;
+
+            _systemsToActivate.Add(system);
+        }
+
+        public void RequestDeactivation<TSystem>() where TSystem : BaseSystem
+        {
+            var system = _systems[typeof(TSystem)];
+            if (!_activeSystems.Contains(system) || _systemsToDeactivate.Contains(system)) return;
+            
+            if (system == null)
+                return;
+            
+            _systemsToDeactivate.Add(system);
         }
     }
 }

@@ -211,7 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f844e58b83d4d845b3098c93141be0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeRoot: {fileID: 0}
 --- !u!1 &6211940807968663687
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +223,7 @@ GameObject:
   - component: {fileID: 4762338018542443623}
   - component: {fileID: 1386744444370120737}
   - component: {fileID: 7766481365326434525}
+  - component: {fileID: 1452046956146608984}
   m_Layer: 3
   m_Name: Winter Player
   m_TagString: Player
@@ -336,6 +336,18 @@ MonoBehaviour:
   branchLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &1452046956146608984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211940807968663687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e67dfd0982482a9072889a78a88b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3104128046787980398
 PrefabInstance:
   m_ObjectHideFlags: 0

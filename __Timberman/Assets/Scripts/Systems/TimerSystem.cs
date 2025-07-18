@@ -1,3 +1,5 @@
+using System;
+using Data;
 using Signals;
 using Systems.Abstractions;
 using Systems.Data;
@@ -7,52 +9,60 @@ using Zenject;
 
 namespace Systems
 {
-    public class TimerSystem : BaseSystem
+    public class TimerSystem : BaseSystem, IInitializable, IDisposable
     {
         private readonly TimerData _timerData;
         private readonly TimerView _timerView;
         private readonly SignalBus _signalBus;
-
-        private float _currentTime;
-        private float _maxTime = 8;
+        private readonly GameBalanceConfig _config;
 
         public TimerSystem(
             TimerData timerData, 
             TimerView timerView, 
-            SignalBus signalBus)
+            SignalBus signalBus,
+            GameBalanceConfig config)
         {
             _timerData = timerData;
             _timerView = timerView;
             _signalBus = signalBus;
+            _config = config;
         }
-
-        public void Init()
-        {   
+        
+        public void Initialize()
+        {
             _signalBus.Subscribe<SegmentChoppedSignal>(ChargeTimer);
-            _currentTime = _maxTime/2;
+            _timerData.MaxTime = _config.maxTime;
+            _timerData.CurrentTime = _config.startingTime;
+            Debug.Log("Timer Started");
+            _timerView.InitializeUI(_config.maxTime, _config.startingTime);
         }
-
+        
         public override void Update()
         {
-            if (_currentTime > 0)
+            if (_timerData.CurrentTime > 0)
             {
-                _currentTime -= Time.deltaTime;
-                _currentTime = Mathf.Max(_currentTime, 0);
+                Debug.Log("Timer: " + _timerData.CurrentTime);
+                _timerData.CurrentTime -= Time.deltaTime;
+                _timerData.CurrentTime = Mathf.Max(_timerData.CurrentTime, 0);
 
-                _timerView.SetSlider(_currentTime);
-                _timerView.SetFill(_currentTime / _maxTime);
+                _timerView.SetSlider(_timerData.CurrentTime);
             }
             else
             {
-                Debug.Log("Timer Expired");
                 _signalBus.Fire<TimerExpiredSignal>();
+                GameplayController.SendActivationRequest<TimerSystem>(false);
             }
         }
 
         private void ChargeTimer(SegmentChoppedSignal segmentChoppedSignal)
         {
-            _currentTime = Mathf.Min(_currentTime + .2f, _maxTime);
+            _timerData.CurrentTime = Mathf.Min(_timerData.CurrentTime + _config.chopBonusTime, _timerData.MaxTime);
         }
 
+
+        public void Dispose()
+        {
+            _signalBus.Unsubscribe<SegmentChoppedSignal>(ChargeTimer);
+        }
     }
 }

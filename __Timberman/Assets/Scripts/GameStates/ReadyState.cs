@@ -1,6 +1,4 @@
-using Controllers;
-using Definitions;
-using GameStates.Abstraction;
+using GameStates.Abstractions;
 using Signals;
 using Systems;
 using UnityEngine;
@@ -10,28 +8,32 @@ namespace GameStates
 {
     public class ReadySate : BaseGameSate
     {
-        [Inject] private readonly SignalBus _signalBus;
-
-        public ReadySate(GameplayController gameplayController, GameStateController gameStateController) 
-            : base(gameplayController,  gameStateController)
-        { }
-
-        public override void Enter(GameStateController stateController)
+        public override void Enter()
         {
-            _signalBus.Subscribe<InputPerformedSignal>(StartGame);
+            Debug.Log("Entering ReadyState");
+            SignalBus.Subscribe<InputPerformedSignal>(StartGame);
+            GameplayController.SendActivationRequest<AnimationSystem>(true);
+            GameplayController.SendActivationRequest<MovementSystem>(true);
+            GameplayController.SendActivationRequest<TreeManagementSystem>(true);
         }
 
-        public override void Update(GameStateController stateController)
+        public override void Update()
         { }
 
-        public override void Exit(GameStateController stateController)
-        { }
+        public override void Exit()
+        {
+            SignalBus.Unsubscribe<InputPerformedSignal>(StartGame);
+        }
+
+        public override void OnEventChangeState()
+        {
+            throw new System.NotImplementedException();
+        }
 
         private void StartGame()
         {
-            _signalBus.Unsubscribe<InputPerformedSignal>(StartGame);
-            GameplayController.SendActivationRequest<InputSystem>(RequestMode.Activation);
-            StateController.ChangeState(StateController.GetGameSate<PlayingState>());
+            GameplayController.SendActivationRequest<InputSystem>(true);
+            GameStateController.ChangeState<PlayingState>();
         }
     }
 }

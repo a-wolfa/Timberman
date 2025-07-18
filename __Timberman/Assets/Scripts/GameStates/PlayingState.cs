@@ -1,27 +1,36 @@
 using Controllers;
 using Definitions;
-using GameStates.Abstraction;
+using GameStates.Abstractions;
 using Systems;
+using UnityEngine;
+using Zenject;
 
 namespace GameStates
 {
-    public class PlayingState : BaseGameSate
+    public class PlayingState : BaseGameSate, IInitializable
     {
-        public PlayingState(GameplayController gameplayController, GameStateController gameStateController) 
-            : base(gameplayController,  gameStateController)
-        { }
-
-        public override void Enter(GameStateController stateController)
+        public override void Enter()
         {
-            GameplayController.SendActivationRequest<TimerSystem>(RequestMode.Activation);
+            Debug.Log("Entering Playing State");
+            GameplayController.SendActivationRequest<TimerSystem>(true);
         }
 
-        public override void Update(GameStateController stateController)
+        public override void Update()
         {
             
         }
 
-        public override void Exit(GameStateController stateController)
+        public override void Exit()
+        {
+            
+        }
+
+        public override void OnEventChangeState()
+        {
+            
+        }
+
+        public void Initialize()
         {
             
         }

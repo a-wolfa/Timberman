@@ -1,6 +1,6 @@
 using Controllers;
 using GameStates;
-using GameStates.Abstraction;
+using GameStates.Abstractions;
 using Zenject;
 
 namespace Installers
@@ -28,6 +28,9 @@ namespace Installers
 
             Container.Bind<PlayingState>().AsTransient();
             Container.Bind<BaseGameSate>().To<PlayingState>().FromResolve();
+
+            Container.Bind<DeathState>().AsTransient();
+            Container.Bind<BaseGameSate>().To<DeathState>().FromResolve();
         }
     }
 }

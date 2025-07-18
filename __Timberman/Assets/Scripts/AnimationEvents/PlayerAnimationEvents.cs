@@ -1,6 +1,4 @@
-using Controllers;
-using Definitions;
-using Systems;
+using Signals;
 using UnityEngine;
 using Zenject;
 
@@ -8,11 +6,11 @@ namespace AnimationEvents
 {
     public class PlayerAnimationEvents : MonoBehaviour
     {
-        [Inject] GameplayController _gameplayController;
+        [Inject] private readonly SignalBus _signalBus;
 
         public void Chop()
         {
-            _gameplayController.SendActivationRequest<ChoppingSystem>(RequestMode.Activation);
+            _signalBus.Fire<SegmentChoppedSignal>();
         }
     }
 }

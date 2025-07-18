@@ -18,68 +18,57 @@ namespace Controllers
     {
         [Inject] private readonly SystemContainer _systemContainer;
         [Inject] private readonly DataContainer _dataContainer;
-        [Inject] ThrowResolver _throwResolver;
+        [Inject] private readonly ThrowResolver _throwResolver;
         [Inject] private readonly SignalBus _signalBus;
-        [Inject] GameStateController _gameStateController;
+        [Inject] private readonly GameStateController _gameStateController;
         
         [SerializeField] private ThrowMode throwMode;
-
-        private CollisionHandler _collisionHandler;
         
-        public Side playerSide = Side.Left;
-        public Theme theme = Theme.Spring;
+        public Side PlayerSide { get; set; } = Side.Left;
+        
+        private void OnEnable()
+        {
+            _signalBus.Subscribe<ThemeSelectedSignal>(OnThemeSelected);
+            _signalBus.Subscribe<SegmentChoppedSignal>(OnChopAnimationEvent);
+        }
+        
+        private void OnDisable()
+        {
+            _signalBus.Unsubscribe<ThemeSelectedSignal>(OnThemeSelected);
+            _signalBus.Unsubscribe<SegmentChoppedSignal>(OnChopAnimationEvent);
+        }
         
         private void Update()
         {
             _systemContainer.Update();
             _dataContainer.Update();
         }
-
-        private void OnEnable()
-        {
-            _signalBus.Subscribe<TimerExpiredSignal>(Die);
-            _signalBus.Subscribe<PlayerCreatedSignal>(OnPlayerCreated);
-            _signalBus.Subscribe<ThemeSelectedSignal>(OnThemeSelected);
-        }
-
-        private void OnDisable()
-        {
-            _signalBus.Unsubscribe<TimerExpiredSignal>(Die);
-            _signalBus.Unsubscribe<PlayerCreatedSignal>(OnPlayerCreated);
-            _signalBus.Unsubscribe<ThemeSelectedSignal>(OnThemeSelected);
-        }
-
-        public void SendActivationRequest<TSystem>(RequestMode request)  where TSystem : BaseSystem
-        {
-            switch (request)
-            {
-                case RequestMode.Activation:
-                    _systemContainer.RequestToActivateSystem<TSystem>();
-                    break;
-                case RequestMode.Deactivation:
-                    _systemContainer.RequestToDeactivateSystem<TSystem>();
-                    break;
-            }
-        }
-
-        private void Die()
-        {
-            _collisionHandler?.Die();
-        }
-
+        
         public IThrow GetThrowStrategy()
         {
             return _throwResolver.ResolveThrowType(throwMode);
         }
-
-        private void OnPlayerCreated(PlayerCreatedSignal signal)
+        
+        public void SendActivationRequest<TSystem>(bool isActive)  where TSystem : BaseSystem
         {
-            _collisionHandler = signal.Player.GetComponent<CollisionHandler>();
+            if (isActive)
+            {
+                _systemContainer.RequestActivation<TSystem>();
+            }
+            else
+            {
+                _systemContainer.RequestDeactivation<TSystem>();
+            }
         }
 
         private void OnThemeSelected()
         {
-            _gameStateController.ChangeState(_gameStateController.GetGameSate<ReadySate>());
+            _gameStateController.ChangeState<ReadySate>();
+        }
+        
+        private void OnChopAnimationEvent()
+        {
+            SendActivationRequest<ChoppingSystem>(true);
         }
     }
 }
