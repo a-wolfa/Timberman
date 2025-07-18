@@ -14,7 +14,7 @@ namespace Services
         [Inject]
         public void Construct(SignalBus signalBus, 
                             [Inject(Id = "ChopAudioSource")] AudioSource audioSource, 
-                            [Inject(Id = "ChopSound")] AudioClip chopSound)
+                            [Inject(Id = "ChopSoundClip")] AudioClip chopSound)
         {
             _signalBus = signalBus;
             _audioSource = audioSource;

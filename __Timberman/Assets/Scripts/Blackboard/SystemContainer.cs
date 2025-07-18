@@ -46,7 +46,6 @@ namespace Blackboard
             foreach (var system in _activeSystems)
             {
                 system.Update();
-                Debug.Log(system.GetType().Name);
             }
             
             DeactivatePendingSystems();

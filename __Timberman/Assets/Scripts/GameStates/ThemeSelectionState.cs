@@ -9,25 +9,13 @@ namespace GameStates
 {
     public class ThemeSelectionSate : BaseGameSate
     {
-
-
         public override void Enter()
-        {
-            Debug.Log("Entering ThemeSelectionSate");
-        }
+        { }
 
         public override void Update()
-        {
-            
-        }
+        { }
 
         public override void Exit()
-        {
-        }
-
-        public override void OnEventChangeState()
-        {
-            
-        }
+        { }
     }
 }

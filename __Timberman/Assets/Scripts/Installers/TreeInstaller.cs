@@ -1,10 +1,5 @@
-using Components;
-using Factories;
 using Factories.Tree;
 using Factories.Tree.FactoryManagers;
-using Pools;
-using Systems;
-using UnityEngine;
 using Zenject;
 
 namespace Installers

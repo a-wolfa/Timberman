@@ -6,11 +6,10 @@ using InputSystem = Systems.InputSystem;
 
 namespace GameStates
 {
-    public class DeathState : BaseGameSate, IInitializable
+    public class DeathState : BaseGameSate
     {
         public override void Enter()
         {
-            Debug.Log("Entering Death State");
             GameplayController.SendActivationRequest<InputSystem>(false);
             GameplayController.SendActivationRequest<TimerSystem>(false);
         }
@@ -21,16 +20,6 @@ namespace GameStates
         }
 
         public override void Exit()
-        {
-            
-        }
-
-        public override void OnEventChangeState()
-        {
-            
-        }
-
-        public void Initialize()
         {
             
         }

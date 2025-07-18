@@ -19,17 +19,13 @@ namespace Controllers
         public void Construct(BaseGameSate[] gameSates)
         {
             _gameSates = gameSates;
-        }
-
-        private void Start()
-        {
             _currentSate = GetGameSate<ThemeSelectionSate>();
-            _currentSate.Enter();
         }
 
         private void OnEnable()
         {
             _signalBus.Subscribe<PlayerDiedSignal>(OnPlayerDiedSignal);
+            _currentSate.Enter();
         }
 
         private void OnDisable()

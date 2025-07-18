@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using Zenject;
 using InputSystem = Systems.InputSystem;
 
-namespace Assets.Scripts.Installers
+namespace Installers
 {
     public class SceneContextInstaller : MonoInstaller
     {
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Installers
         public override void InstallBindings()
         {
             AddControllerBindings();
-            AddAssetBindigns();
+            AddAssetBindings();
             AddUIBindings();
             AddAudioBindings();
             AddTreeBindings();
@@ -52,7 +52,7 @@ namespace Assets.Scripts.Installers
                 .AsSingle();
         }
 
-        private void AddAssetBindigns()
+        private void AddAssetBindings()
         {
             Container.Bind<InputActionAsset>()
                 .FromInstance(inputactionAsset)
@@ -72,6 +72,10 @@ namespace Assets.Scripts.Installers
                 .AsSingle();
 
             Container.Bind<ScoreView>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container.Bind<TapGroupView>()
                 .FromComponentInHierarchy()
                 .AsSingle();
 

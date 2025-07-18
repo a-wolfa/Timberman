@@ -7,32 +7,17 @@ using Zenject;
 
 namespace GameStates
 {
-    public class PlayingState : BaseGameSate, IInitializable
+    public class PlayingState : BaseGameSate
     {
         public override void Enter()
         {
-            Debug.Log("Entering Playing State");
             GameplayController.SendActivationRequest<TimerSystem>(true);
         }
 
         public override void Update()
-        {
-            
-        }
+        { }
 
         public override void Exit()
-        {
-            
-        }
-
-        public override void OnEventChangeState()
-        {
-            
-        }
-
-        public void Initialize()
-        {
-            
-        }
+        { }
     }
 }

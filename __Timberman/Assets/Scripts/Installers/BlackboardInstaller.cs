@@ -51,7 +51,6 @@ namespace Installers
             AddTree();
             AddController();
             AddThrow();
-            AddEnvironment();
             AddConfigs();
         }
 
@@ -69,10 +68,7 @@ namespace Installers
             
         }
 
-        private void AddEnvironment()
-        {
-            Container.Bind<EnvironmentFactory>().AsSingle();
-        }
+        
 
         private void AddConfigs()
         {

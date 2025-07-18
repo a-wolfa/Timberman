@@ -10,7 +10,6 @@ namespace GameStates
     {
         public override void Enter()
         {
-            Debug.Log("Entering ReadyState");
             SignalBus.Subscribe<InputPerformedSignal>(StartGame);
             GameplayController.SendActivationRequest<AnimationSystem>(true);
             GameplayController.SendActivationRequest<MovementSystem>(true);
@@ -23,11 +22,6 @@ namespace GameStates
         public override void Exit()
         {
             SignalBus.Unsubscribe<InputPerformedSignal>(StartGame);
-        }
-
-        public override void OnEventChangeState()
-        {
-            throw new System.NotImplementedException();
         }
 
         private void StartGame()

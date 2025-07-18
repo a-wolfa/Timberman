@@ -10,12 +10,6 @@ namespace Installers
         public override void InstallBindings()
         {
             AddStates();
-            AddControllers();
-        }
-
-        private void AddControllers()
-        {
-            Container.Bind<GameStateController>().FromComponentInHierarchy().AsSingle();
         }
 
         private void AddStates()

@@ -33,7 +33,6 @@ namespace Systems
             _signalBus.Subscribe<SegmentChoppedSignal>(ChargeTimer);
             _timerData.MaxTime = _config.maxTime;
             _timerData.CurrentTime = _config.startingTime;
-            Debug.Log("Timer Started");
             _timerView.InitializeUI(_config.maxTime, _config.startingTime);
         }
         
@@ -41,7 +40,6 @@ namespace Systems
         {
             if (_timerData.CurrentTime > 0)
             {
-                Debug.Log("Timer: " + _timerData.CurrentTime);
                 _timerData.CurrentTime -= Time.deltaTime;
                 _timerData.CurrentTime = Mathf.Max(_timerData.CurrentTime, 0);
 

@@ -14,8 +14,6 @@ namespace GameStates.Abstractions
         public abstract void Update();
         
         public abstract void Exit();
-
-        public abstract void OnEventChangeState();
         
     }
 }
