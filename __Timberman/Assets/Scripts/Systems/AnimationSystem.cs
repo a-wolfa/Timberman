@@ -13,7 +13,8 @@ namespace Systems
         private readonly SignalBus _signalBus;
         
         private  Animator _animator;
-        
+
+        private int _parameterID;
         
         public AnimationSystem(InputData inputData, SignalBus signalBus)
         {
@@ -28,12 +29,13 @@ namespace Systems
         
         public override void Update()
         {
-            _animator?.SetInteger(AnimNames.PlayerChopAnimation, _inputData.ChopDirection);
+            _animator?.SetInteger(_parameterID, _inputData.ChopDirection);
         }
 
         private void OnPlayerCreated(PlayerCreatedSignal signal)
         {
             _animator = signal.Player.GetComponentInChildren<Animator>();
+            _parameterID = Animator.StringToHash(AnimNames.PlayerChopAnimation);
         }
     }
 }
